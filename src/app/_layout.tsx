@@ -1,18 +1,22 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useColorScheme } from 'react-native';
+// import * as SplashScreen from "expo-splash-screen";
 
-import { AnimatedSplashOverlay } from '@/components/animated-icon';
-import AppTabs from '@/components/app-tabs';
+// import AppTabs from "./components/app-tabs";
 
-SplashScreen.preventAutoHideAsync();
+// SplashScreen.preventAutoHideAsync();
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-  return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <AnimatedSplashOverlay />
-      <AppTabs />
-    </ThemeProvider>
-  );
+// export default function TabLayout() {
+// 	// return <AppTabs />;
+// }
+import { Stack } from "expo-router";
+import { Text } from "react-native";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+
+export default function Layout() {
+	return (
+		<SafeAreaProvider>
+			<Stack />
+		</SafeAreaProvider>
+	);
+	// или даже просто:
+	// return <Text>Макет загружен</Text>;
 }
