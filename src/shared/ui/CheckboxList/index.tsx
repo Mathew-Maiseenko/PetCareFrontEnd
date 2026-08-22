@@ -13,20 +13,22 @@ import TickIcon from "../Icons/Tick";
 import { Colors } from "@/shared/styles";
 import Checkbox from "../Checkbox";
 
-interface CheckboxOption {
+type CheckboxOption = {
 	id: number;
 	label: string;
-	isSelected: boolean;
-}
+	value?: string;
+};
 
-interface CheckboxListProps {
+type CheckboxListProps = {
 	data: CheckboxOption[];
 	onOptionSelect: (id: number) => void;
-}
+	selectedId: number;
+};
 
 export default function CheckboxList({
 	data,
 	onOptionSelect,
+	selectedId,
 }: CheckboxListProps) {
 	const handleOptionSelect = (id: number) => () => onOptionSelect(id);
 
@@ -35,10 +37,13 @@ export default function CheckboxList({
 			style={styles.list}
 			data={data}
 			keyExtractor={(item) => item.id.toString()}
-			renderItem={({ item: { label, isSelected, id } }) => (
+			renderItem={({ item: { label, id } }) => (
 				<View style={styles.optionContainer}>
-					<Text>{label}</Text>
-					<Checkbox onValueChange={handleOptionSelect(id)} value={isSelected} />
+					<Text style={styles.optionText}>{label}</Text>
+					<Checkbox
+						onValueChange={handleOptionSelect(id)}
+						value={id === selectedId}
+					/>
 				</View>
 			)}
 		/>
@@ -46,11 +51,18 @@ export default function CheckboxList({
 }
 
 const styles = StyleSheet.create({
+	optionText: {
+		fontSize: 20,
+		lineHeight: 26,
+	},
 	list: {
-		gap: 12,
+		width: "100%",
+		gap: 24,
 	},
 	optionContainer: {
+		width: "100%",
 		flexDirection: "row",
 		justifyContent: "space-between",
+		marginBottom: 8,
 	},
 });

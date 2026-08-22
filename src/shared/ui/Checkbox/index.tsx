@@ -26,7 +26,7 @@ interface CheckboxProps {
 export default function Checkbox({
 	value,
 	onValueChange,
-	size = 24,
+	size = 32,
 	style,
 }: CheckboxProps) {
 	const [internalValue, setInternalValue] = useState(false);

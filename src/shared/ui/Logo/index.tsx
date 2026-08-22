@@ -1,4 +1,4 @@
-import CommonRegistrationStep from "@/feature/registr/ui/steps/common";
+import CommonRegistrationStep from "@/feature/registr/ui/steps/common/first";
 import { Image, StyleSheet, Text, View } from "react-native";
 
 const logo = require("./assets/LogoImage.webp");

@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
 		position: "relative",
 		borderColor: Colors.borderPrimary,
 		borderWidth: 1,
+		borderRadius: 10,
 	},
 	input: {
 		borderRadius: 10,

@@ -1,18 +1,27 @@
-import { StyledButton } from "@/shared/ui/Button";
-import { StyledInput } from "@/shared/ui/Input";
 import Logo from "@/shared/ui/Logo";
 import { Button, StyleSheet, Text, View } from "react-native";
+import CommonRegistrationStep from "./steps/common/first";
+import { UserRole } from "@/entity/user/types";
+import { RegistrationStep } from "../types";
+
+import {
+	COUNT_OF_STEPS,
+	getComponentScreenByRoleAndStep,
+} from "./steps/config";
+import { useRegistrationStore } from "../model";
+import StepIndicator from "@/shared/ui/StepIndicator";
 
 export default function RegistrationScreen() {
+	const { currentStep, setCurrentStep, currentRole } = useRegistrationStore();
 	return (
 		<View style={styles.container}>
-			<View style={styles.form}>
-				<Logo />
-
-				<StyledInput placeholder="Имя пользователя" />
-				<StyledInput placeholder="Пароль" password />
-			</View>
-			<StyledButton full>Войти</StyledButton>
+			<StepIndicator
+				onStepPress={setCurrentStep}
+				totalSteps={COUNT_OF_STEPS}
+				currentStep={currentStep}
+			/>
+			<Logo />
+			{getComponentScreenByRoleAndStep(currentRole, currentStep)}
 		</View>
 	);
 }
@@ -20,20 +29,17 @@ export default function RegistrationScreen() {
 const styles = StyleSheet.create({
 	form: {
 		width: "100%",
-
 		justifyContent: "center",
 		alignItems: "center",
 		flexDirection: "column",
 		gap: 24,
-		// backgroundColor: "blue",
 	},
 
 	container: {
 		width: "100%",
 		flex: 1,
-		justifyContent: "flex-start",
 		alignItems: "center",
 		flexDirection: "column",
-		// backgroundColor: "red",
+		justifyContent: "space-between",
 	},
 });
