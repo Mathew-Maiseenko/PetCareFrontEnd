@@ -1,5 +1,6 @@
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import {
+	Animated,
 	Pressable,
 	StyleSheet,
 	Text,
@@ -10,6 +11,7 @@ import {
 import EyeClosed from "../Icons/EyeClosed";
 import EyeOpenedIcon from "../Icons/EyeOpened";
 import { Colors } from "@/shared/styles";
+import ArrowIcon from "../Icons/Arrow";
 
 type CustomInputProps<T extends string> = TextInputProps & {
 	placeholder: string;
@@ -26,20 +28,40 @@ export function StyledSelectInput<T extends string>({
 	...props
 }: CustomInputProps<T>) {
 	const [isMenuShown, setIsMenuShown] = useState(false);
+	const menuArrowRotation = useRef(new Animated.Value(0)).current;
 
-	const toggleMenu = useCallback(() => {
+	const toggleMenu = () => {
+		const toValue = isMenuShown ? 0 : 1;
+
+		Animated.spring(menuArrowRotation, {
+			toValue,
+			friction: 5, // сопротивление (чем меньше, тем больше колебаний)
+			tension: 100, // натяжение (чем больше, тем быстрее)
+			useNativeDriver: true,
+		}).start();
 		setIsMenuShown((shown) => !shown);
-	}, []);
+	};
 
 	const handleSelectOption = useCallback(
 		(value: T) => {
 			onSelectValue(value);
 			setIsMenuShown(false);
+
+			Animated.timing(menuArrowRotation, {
+				toValue: 0,
+				duration: 100,
+				useNativeDriver: true,
+			}).start();
 		},
 		[onSelectValue],
 	);
 
 	const hasOptions = options && options.length > 0;
+
+	const rotate = menuArrowRotation.interpolate({
+		inputRange: [0, 1],
+		outputRange: ["0deg", "90deg"],
+	});
 
 	return (
 		<View style={styles.inputContainer}>
@@ -51,13 +73,18 @@ export function StyledSelectInput<T extends string>({
 				editable={false}
 				{...props}
 			/>
-
 			<Pressable style={styles.rightMenu} onPress={toggleMenu}>
-				{!isMenuShown ? (
-					<EyeOpenedIcon stroke={Colors.placeholder} width={25} height={25} />
-				) : (
-					<EyeClosed fill={Colors.placeholder} width={25} height={25} />
-				)}
+				<Animated.View
+					style={{
+						transform: [
+							{
+								rotate,
+							},
+						],
+					}}
+				>
+					<ArrowIcon width={25} height={25} stroke={Colors.placeholder} />
+				</Animated.View>
 			</Pressable>
 
 			{isMenuShown && hasOptions && (
@@ -121,6 +148,7 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		height: "100%",
 	},
+	rightMenuIcon: {},
 	menuItem: {
 		paddingVertical: 12,
 		paddingHorizontal: 20,
