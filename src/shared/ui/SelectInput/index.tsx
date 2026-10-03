@@ -2,23 +2,17 @@ import { useCallback, useRef, useState } from "react";
 import {
 	Animated,
 	Pressable,
-	StyleSheet,
 	Text,
 	TextInput,
-	TextInputProps,
 	View,
 } from "react-native";
-import EyeClosed from "../Icons/EyeClosed";
-import EyeOpenedIcon from "../Icons/EyeOpened";
+
 import { Colors } from "@/shared/styles";
+
 import ArrowIcon from "../Icons/Arrow";
 
-type CustomInputProps<T extends string> = TextInputProps & {
-	placeholder: string;
-	options: T[];
-	selectedValue: T;
-	onSelectValue: (value: T) => void;
-};
+import { styles } from "./styles";
+import { StyledSelectInputProps } from "./types";
 
 export function StyledSelectInput<T extends string>({
 	options,
@@ -26,7 +20,7 @@ export function StyledSelectInput<T extends string>({
 	onSelectValue,
 	placeholder,
 	...props
-}: CustomInputProps<T>) {
+}: StyledSelectInputProps<T>) {
 	const [isMenuShown, setIsMenuShown] = useState(false);
 	const menuArrowRotation = useRef(new Animated.Value(0)).current;
 
@@ -35,8 +29,8 @@ export function StyledSelectInput<T extends string>({
 
 		Animated.spring(menuArrowRotation, {
 			toValue,
-			friction: 5, // сопротивление (чем меньше, тем больше колебаний)
-			tension: 100, // натяжение (чем больше, тем быстрее)
+			friction: 5,
+			tension: 100,
 			useNativeDriver: true,
 		}).start();
 		setIsMenuShown((shown) => !shown);
@@ -95,7 +89,7 @@ export function StyledSelectInput<T extends string>({
 							style={({ pressed }) => [
 								styles.menuItem,
 								pressed && { backgroundColor: Colors.borderPrimary },
-								option === selectedValue && styles.menuItemSelected, //
+								option === selectedValue && styles.menuItemSelected,
 							]}
 							onPress={() => handleSelectOption(option)}
 						>
@@ -107,59 +101,3 @@ export function StyledSelectInput<T extends string>({
 		</View>
 	);
 }
-
-const styles = StyleSheet.create({
-	menu: {
-		width: "100%",
-		position: "absolute",
-		top: "100%",
-		marginTop: 5,
-		left: 0,
-		right: 0,
-		borderColor: Colors.borderPrimary,
-		borderWidth: 1,
-		borderRadius: 10,
-		backgroundColor: Colors.secondaryBackground,
-		zIndex: 10,
-		maxHeight: 200,
-		overflow: "hidden",
-	},
-	inputContainer: {
-		width: "100%",
-		position: "relative",
-		borderColor: Colors.borderPrimary,
-		borderWidth: 1,
-		borderRadius: 10,
-	},
-	input: {
-		borderRadius: 10,
-		color: Colors.textPrimary,
-		backgroundColor: Colors.secondaryBackground,
-		width: "100%",
-		height: 55,
-		fontSize: 18,
-		paddingLeft: 20,
-		paddingRight: 20,
-	},
-	rightMenu: {
-		position: "absolute",
-		top: 0,
-		right: 15,
-		justifyContent: "center",
-		height: "100%",
-	},
-	rightMenuIcon: {},
-	menuItem: {
-		paddingVertical: 12,
-		paddingHorizontal: 20,
-		borderBottomWidth: 1,
-		borderBottomColor: Colors.borderPrimary,
-	},
-	menuItemSelected: {
-		backgroundColor: Colors.placeholder, // или любой другой цвет для выделения
-	},
-	menuItemText: {
-		fontSize: 18,
-		color: Colors.textPrimary,
-	},
-});

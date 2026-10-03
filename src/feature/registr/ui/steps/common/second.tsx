@@ -1,46 +1,63 @@
+import { validateCredentialsStep } from "@/feature/registr/lib/validation/credentials-step";
 import { useRegistrationStore } from "@/feature/registr/model";
 import { StyledButton } from "@/shared/ui/Button";
 import { StyledInput } from "@/shared/ui/Input";
-import { useState } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { useMemo, useState } from "react";
+import { Text, View } from "react-native";
+
+import { stepFormStyles } from "../shared/styles";
 
 export default function CredentialsRegistrationStep() {
-	const { name, password, setName, setPassword, setCurrentStep } =
-		useRegistrationStore();
+	const {
+		name,
+		password,
+		confirmPassword,
+		setName,
+		setPassword,
+		setConfirmPassword,
+		setCurrentStep,
+	} = useRegistrationStore();
 
 	const [localName, setLocalName] = useState(name);
 	const [localPassword, setLocalPassword] = useState(password);
-	const [confirmPassword, setConfirmPassword] = useState("");
+	const [localConfirmPassword, setLocalConfirmPassword] =
+		useState(confirmPassword);
 	const [error, setError] = useState<string | null>(null);
 
+	const isFormValid = useMemo(
+		() =>
+			validateCredentialsStep({
+				name: localName,
+				password: localPassword,
+				confirmPassword: localConfirmPassword,
+			}).isValid,
+		[localName, localPassword, localConfirmPassword],
+	);
+
 	const handlePressNext = () => {
-		if (!localName.trim()) {
-			setError("Введите имя");
+		const validation = validateCredentialsStep({
+			name: localName,
+			password: localPassword,
+			confirmPassword: localConfirmPassword,
+		});
+
+		if (!validation.isValid) {
+			setError(validation.error);
 			return;
 		}
-		if (!localPassword.trim()) {
-			setError("Введите пароль");
-			return;
-		}
-		if (localPassword !== confirmPassword) {
-			setError("Пароли не совпадают");
-			return;
-		}
-		if (localPassword.length < 6) {
-			setError("Пароль должен содержать минимум 6 символов");
-			return;
-		}
+
 		setError(null);
 
 		setName(localName.trim());
-		setPassword(localPassword.trim());
+		setPassword(localPassword);
+		setConfirmPassword(localConfirmPassword);
 
 		setCurrentStep(2);
 	};
 
 	return (
 		<>
-			<View style={styles.form}>
+			<View style={stepFormStyles.form}>
 				<StyledInput
 					placeholder="Имя"
 					value={localName}
@@ -57,31 +74,15 @@ export default function CredentialsRegistrationStep() {
 				<StyledInput
 					password
 					placeholder="Подтверждение пароля"
-					value={confirmPassword}
-					onChangeText={setConfirmPassword}
+					value={localConfirmPassword}
+					onChangeText={setLocalConfirmPassword}
 					secureTextEntry
 				/>
-				{error && <Text style={styles.error}>{error}</Text>}
+				{error && <Text style={stepFormStyles.error}>{error}</Text>}
 			</View>
-			<StyledButton full onPress={handlePressNext}>
+			<StyledButton full disabled={!isFormValid} onPress={handlePressNext}>
 				Далее
 			</StyledButton>
 		</>
 	);
 }
-
-const styles = StyleSheet.create({
-	form: {
-		width: "100%",
-		justifyContent: "center",
-		alignItems: "center",
-		flexDirection: "column",
-		gap: 24,
-	},
-	error: {
-		color: "red",
-		fontSize: 14,
-		marginTop: 8,
-		alignSelf: "flex-start",
-	},
-});

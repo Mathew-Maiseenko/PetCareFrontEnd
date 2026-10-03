@@ -1,19 +1,18 @@
-import { Pressable, PressableProps, StyleSheet, Text } from "react-native";
+import { Pressable, Text } from "react-native";
 
-import { Colors } from "@/shared/styles";
-
-interface StyledButtonProps extends PressableProps {
-	full?: boolean;
-}
+import { styles } from "./styles";
+import { StyledButtonProps } from "./types";
 
 export function StyledButton({
 	style,
 	children,
 	full,
+	disabled,
 	...props
 }: StyledButtonProps) {
 	return (
 		<Pressable
+			disabled={disabled}
 			style={({ pressed, ...otherParams }) => {
 				const userStyle =
 					typeof style === "function"
@@ -23,37 +22,20 @@ export function StyledButton({
 				return [
 					styles.button,
 					full && styles.buttonFull,
-					pressed && styles.buttonPressed,
+					disabled && styles.buttonDisabled,
+					pressed && !disabled && styles.buttonPressed,
 					userStyle,
 				];
 			}}
 			{...props}
 		>
 			{typeof children === "string" ? (
-				<Text style={styles.text}>{children}</Text>
+				<Text style={[styles.text, disabled && styles.textDisabled]}>
+					{children}
+				</Text>
 			) : (
 				children
 			)}
 		</Pressable>
 	);
 }
-
-const styles = StyleSheet.create({
-	button: {
-		backgroundColor: Colors.buttonPrimary,
-		padding: 12,
-		borderRadius: 15,
-	},
-	buttonFull: {
-		width: "100%",
-	},
-	buttonPressed: {
-		opacity: 0.4,
-	},
-	text: {
-		color: Colors.textPrimary,
-		fontWeight: 700,
-		fontSize: 20,
-		textAlign: "center",
-	},
-});

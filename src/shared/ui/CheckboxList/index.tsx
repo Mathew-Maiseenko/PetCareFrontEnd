@@ -1,29 +1,9 @@
-import React, { useState } from "react";
-import {
-	Pressable,
-	StyleSheet,
-	ViewStyle,
-	StyleProp,
-	FlatList,
-	View,
-	Text,
-} from "react-native";
-import Svg, { Path } from "react-native-svg";
-import TickIcon from "../Icons/Tick";
-import { Colors } from "@/shared/styles";
+import { FlatList, Text, View } from "react-native";
+
 import Checkbox from "../Checkbox";
 
-type CheckboxOption = {
-	id: number;
-	label: string;
-	value?: string;
-};
-
-type CheckboxListProps = {
-	data: CheckboxOption[];
-	onOptionSelect: (id: number) => void;
-	selectedId: number;
-};
+import { styles } from "./styles";
+import { CheckboxListProps } from "./types";
 
 export default function CheckboxList({
 	data,
@@ -49,20 +29,3 @@ export default function CheckboxList({
 		/>
 	);
 }
-
-const styles = StyleSheet.create({
-	optionText: {
-		fontSize: 20,
-		lineHeight: 26,
-	},
-	list: {
-		width: "100%",
-		gap: 24,
-	},
-	optionContainer: {
-		width: "100%",
-		flexDirection: "row",
-		justifyContent: "space-between",
-		marginBottom: 8,
-	},
-});

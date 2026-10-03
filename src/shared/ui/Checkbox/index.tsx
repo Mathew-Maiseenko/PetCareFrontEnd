@@ -1,27 +1,12 @@
-import React, { useState } from "react";
-import { Pressable, StyleSheet, ViewStyle, StyleProp } from "react-native";
-import Svg, { Path } from "react-native-svg";
-import TickIcon from "../Icons/Tick";
+import { useState } from "react";
+import { Pressable } from "react-native";
+
 import { Colors } from "@/shared/styles";
 
-interface CheckboxProps {
-	/**
-	 * Текущее состояние (true = отмечен)
-	 */
-	value: boolean;
-	/**
-	 * Коллбэк при изменении состояния
-	 */
-	onValueChange: (newValue: boolean) => void;
-	/**
-	 * Размер чекбокса (по умолчанию 24)
-	 */
-	size?: number;
-	/**
-	 * Дополнительные стили для контейнера
-	 */
-	style?: StyleProp<ViewStyle>;
-}
+import TickIcon from "../Icons/Tick";
+
+import { styles } from "./styles";
+import { CheckboxProps } from "./types";
 
 export default function Checkbox({
 	value,
@@ -62,13 +47,3 @@ export default function Checkbox({
 		</Pressable>
 	);
 }
-
-const styles = StyleSheet.create({
-	checkbox: {
-		padding: 5,
-		borderWidth: 1,
-		borderRadius: "50%",
-		alignItems: "center",
-		justifyContent: "center",
-	},
-});

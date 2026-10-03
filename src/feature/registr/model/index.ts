@@ -1,11 +1,16 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
+import { saveRegisteredUser } from "../lib/storage/save-registered-user";
 import {
 	OwnerRegistration,
 	SitterRegistration,
 	HotelRegistration,
 	RegistrationStep,
 } from "../types";
+import {
+	RegisteredUserData,
+	RegistrationPayload,
+} from "../types/stored-user";
 import { UserCountry, UserRole } from "@/entity/user/types";
 
 // Начальные значения только для специфичных полей (без name и password)
@@ -22,7 +27,8 @@ const initialSitterData: Omit<SitterRegistration, "name" | "password"> = {
 	hasEducation: false,
 };
 
-const initialHotelData: Omit<HotelRegistration, "hotelName" | "password"> = {
+const initialHotelData: Omit<HotelRegistration, "password"> = {
+	hotelName: "",
 	address: "",
 	cost: undefined,
 	worksByContract: false,
@@ -32,6 +38,8 @@ export type RegistrationState = {
 	// Общие поля на верхнем уровне
 	name: string;
 	password: string;
+	confirmPassword: string;
+	phone: string;
 
 	// Специфичные данные для каждой роли (без общих полей)
 	ownerData: typeof initialOwnerData;
@@ -45,6 +53,8 @@ export type RegistrationState = {
 	// Сеттеры для общих полей
 	setName: (name: string) => void;
 	setPassword: (password: string) => void;
+	setConfirmPassword: (confirmPassword: string) => void;
+	setPhone: (phone: string) => void;
 
 	// Сеттеры для специфичных данных (принимают только свои поля)
 	setOwnerData: (data: Partial<typeof initialOwnerData>) => void;
@@ -55,11 +65,9 @@ export type RegistrationState = {
 	setCurrentCountry: (country: UserCountry) => void;
 
 	// Возвращает полный объект для текущей роли (объединяя общие поля и специфику)
-	getCurrentData: () =>
-		| (OwnerRegistration & { role: UserRole.PET_OWNER })
-		| (SitterRegistration & { role: UserRole.PET_NURSE })
-		| (HotelRegistration & { role: UserRole.PET_HOTEL })
-		| null;
+	getCurrentData: () => RegistrationPayload | null;
+
+	completeRegistration: () => RegisteredUserData | null;
 
 	resetAll: () => void;
 	resetRoleData: (role: UserRole) => void;
@@ -72,6 +80,8 @@ export const useRegistrationStore = create<RegistrationState>()(
 			// Начальные значения
 			name: "",
 			password: "",
+			confirmPassword: "",
+			phone: "",
 			ownerData: initialOwnerData,
 			sitterData: initialSitterData,
 			hotelData: initialHotelData,
@@ -82,6 +92,9 @@ export const useRegistrationStore = create<RegistrationState>()(
 			// Сеттеры для общих полей
 			setName: (name) => set(() => ({ name })),
 			setPassword: (password) => set(() => ({ password })),
+			setConfirmPassword: (confirmPassword) =>
+				set(() => ({ confirmPassword })),
+			setPhone: (phone) => set(() => ({ phone })),
 
 			// Сеттеры для специфичных данных
 			setOwnerData: (data) =>
@@ -109,22 +122,41 @@ export const useRegistrationStore = create<RegistrationState>()(
 					currentRole,
 					name,
 					password,
+					phone,
+					currentCountry,
 					ownerData,
 					sitterData,
 					hotelData,
 				} = get();
+
+				if (!currentRole || !currentCountry) {
+					return null;
+				}
+
+				const meta = { phone, country: currentCountry };
+
 				if (currentRole === UserRole.PET_OWNER) {
-					return { ...ownerData, name, password, role: UserRole.PET_OWNER };
+					return {
+						...meta,
+						...ownerData,
+						name,
+						password,
+						role: UserRole.PET_OWNER,
+					};
 				}
 				if (currentRole === UserRole.PET_NURSE) {
-					return { ...sitterData, name, password, role: UserRole.PET_NURSE };
+					return {
+						...meta,
+						...sitterData,
+						name,
+						password,
+						role: UserRole.PET_NURSE,
+					};
 				}
 				if (currentRole === UserRole.PET_HOTEL) {
-					// Для отеля поле имени в возвращаемом объекте должно быть hotelName,
-					// но мы используем общее name, поэтому маппим
 					return {
+						...meta,
 						...hotelData,
-						hotelName: name,
 						password,
 						role: UserRole.PET_HOTEL,
 					};
@@ -132,10 +164,30 @@ export const useRegistrationStore = create<RegistrationState>()(
 				return null;
 			},
 
+			completeRegistration: () => {
+				const data = get().getCurrentData();
+
+				if (!data) {
+					return null;
+				}
+
+				const registeredUser: RegisteredUserData = {
+					...data,
+					registeredAt: new Date().toISOString(),
+				};
+
+				saveRegisteredUser(registeredUser);
+				get().resetAll();
+
+				return registeredUser;
+			},
+
 			resetAll: () =>
 				set({
 					name: "",
 					password: "",
+					confirmPassword: "",
+					phone: "",
 					ownerData: initialOwnerData,
 					sitterData: initialSitterData,
 					hotelData: initialHotelData,

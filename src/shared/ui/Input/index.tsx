@@ -1,18 +1,20 @@
 import { useCallback, useState } from "react";
-import {
-	Pressable,
-	StyleSheet,
-	TextInput,
-	TextInputProps,
-	View,
-} from "react-native";
-import EyeClosed from "../Icons/EyeClosed";
-import EyeOpenedIcon from "../Icons/EyeOpened";
+import { Pressable, TextInput, View } from "react-native";
+
 import { Colors } from "@/shared/styles";
 
-type CustomInputProps = TextInputProps & { password?: boolean };
+import EyeClosed from "../Icons/EyeClosed";
+import EyeOpenedIcon from "../Icons/EyeOpened";
 
-export function StyledInput({ password, ...props }: CustomInputProps) {
+import { styles } from "./styles";
+import { StyledInputProps } from "./types";
+
+export function StyledInput({
+	password,
+	secureTextEntry,
+	style,
+	...props
+}: StyledInputProps) {
 	const [isPasswordShown, setIsPasswordShown] = useState(false);
 
 	const handlePasswordShowingChange = useCallback(
@@ -20,13 +22,15 @@ export function StyledInput({ password, ...props }: CustomInputProps) {
 		[],
 	);
 
+	const isSecure = password ? !isPasswordShown : secureTextEntry;
+
 	return (
 		<View style={styles.inputContainer}>
 			<TextInput
-				style={styles.input}
-				secureTextEntry={password && !isPasswordShown}
-				placeholderTextColor={Colors.placeholder}
 				{...props}
+				style={[styles.input, style]}
+				placeholderTextColor={Colors.placeholder}
+				secureTextEntry={isSecure}
 			/>
 			{password && (
 				<Pressable
@@ -43,31 +47,3 @@ export function StyledInput({ password, ...props }: CustomInputProps) {
 		</View>
 	);
 }
-
-const styles = StyleSheet.create({
-	inputContainer: {
-		width: "100%",
-		position: "relative",
-		borderColor: Colors.borderPrimary,
-		borderWidth: 1,
-		borderRadius: 10,
-	},
-	input: {
-		borderRadius: 10,
-		color: Colors.textPrimary,
-		backgroundColor: Colors.secondaryBackground,
-		width: "100%",
-		height: 55,
-		fontSize: 18,
-		paddingLeft: 20,
-		paddingRight: 20,
-	},
-
-	rightMenu: {
-		position: "absolute",
-		top: 0,
-		right: 15,
-		justifyContent: "center",
-		height: "100%",
-	},
-});
