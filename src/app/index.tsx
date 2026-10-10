@@ -4,6 +4,10 @@ import { getRoleHomeHref } from '@/shared/navigation/role-home'
 import { Redirect } from 'expo-router'
 
 export default function HomeScreen() {
+	if (__DEV__) {
+		return <Redirect href='/sitter/profile' />
+	}
+
 	const user = getRegisteredUser()
 	const roleHomeHref = user ? getRoleHomeHref(user.role) : null
 

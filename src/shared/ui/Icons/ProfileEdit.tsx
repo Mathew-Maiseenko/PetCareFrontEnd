@@ -1,6 +1,7 @@
+import { Colors } from '@/shared/styles'
 import Svg, { Path, SvgProps } from 'react-native-svg'
 
-const DEFAULT_COLOR = '#FEBC46'
+const DEFAULT_COLOR = Colors.buttonPrimary
 
 export default function ProfileEditIcon({
 	color = DEFAULT_COLOR,

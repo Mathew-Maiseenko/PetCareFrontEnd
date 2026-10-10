@@ -1,20 +1,30 @@
+import { Colors } from '@/shared/styles'
 import Svg, { ClipPath, Defs, G, Path, Rect, SvgProps } from 'react-native-svg'
 
-export default function ArrowIcon(props: SvgProps) {
+const DEFAULT_COLOR = Colors.placeholder
+
+export default function ArrowIcon({
+	color = DEFAULT_COLOR,
+	stroke = color,
+	width,
+	height,
+	...props
+}: SvgProps) {
 	return (
 		<Svg
-			width={props.width}
-			height={props.height}
+			width={width}
+			height={height}
 			viewBox='0 0 15 15'
 			fill='none'
+			{...props}
 		>
-			<G clip-path='url(#clip0_69_125)'>
+			<G clipPath='url(#clip0_69_125)'>
 				<Path
 					d='M1.875 4.375L7.5 10.3125L14 4.375'
-					stroke={props.stroke}
-					stroke-width='1.5'
-					stroke-linecap='round'
-					stroke-linejoin='round'
+					stroke={stroke}
+					strokeWidth='1.5'
+					strokeLinecap='round'
+					strokeLinejoin='round'
 				/>
 			</G>
 			<Defs>

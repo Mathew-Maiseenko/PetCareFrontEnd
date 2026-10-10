@@ -11,6 +11,7 @@ import { useLogout } from '../lib/logout'
 type RoleHomeScreenProps = {
 	role: UserRole.PET_OWNER | UserRole.PET_NURSE | UserRole.PET_HOTEL
 	title: string
+	withTabBar?: boolean
 }
 
 const getGreetingName = (role: RoleHomeScreenProps['role']) => {
@@ -27,12 +28,19 @@ const getGreetingName = (role: RoleHomeScreenProps['role']) => {
 	return user.name
 }
 
-export function RoleHomeScreen({ role, title }: RoleHomeScreenProps) {
+export function RoleHomeScreen({
+	role,
+	title,
+	withTabBar = false,
+}: RoleHomeScreenProps) {
 	const name = getGreetingName(role)
 	const logout = useLogout()
 
 	return (
-		<SafeAreaView style={styles.main}>
+		<SafeAreaView
+			style={[styles.main, withTabBar && styles.mainWithTabBar]}
+			edges={withTabBar ? ['top'] : undefined}
+		>
 			<View style={styles.content}>
 				<Logo />
 				<Text style={styles.title}>{title}</Text>
@@ -54,6 +62,9 @@ const styles = StyleSheet.create({
 		paddingTop: Gaps.four,
 		paddingBottom: 56,
 		justifyContent: 'space-between',
+	},
+	mainWithTabBar: {
+		paddingBottom: Gaps.four,
 	},
 	content: {
 		flex: 1,

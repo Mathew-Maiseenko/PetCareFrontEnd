@@ -1,6 +1,7 @@
+import { Colors } from '@/shared/styles'
 import Svg, { ClipPath, Defs, G, Path, Rect, SvgProps } from 'react-native-svg'
 
-const DEFAULT_COLOR = '#9D9D9D'
+const DEFAULT_COLOR = Colors.icon
 
 export default function CalendarIcon({
 	color = DEFAULT_COLOR,

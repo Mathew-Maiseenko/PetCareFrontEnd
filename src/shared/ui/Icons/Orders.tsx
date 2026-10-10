@@ -1,6 +1,7 @@
+import { Colors } from '@/shared/styles'
 import Svg, { Path, Rect, SvgProps } from 'react-native-svg'
 
-const DEFAULT_COLOR = '#9D9D9D'
+const DEFAULT_COLOR = Colors.icon
 
 export default function OrdersIcon({
 	color = DEFAULT_COLOR,

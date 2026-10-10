@@ -3,8 +3,8 @@ import { Href } from 'expo-router'
 
 export const ROLE_HOME_HREF = {
 	[UserRole.PET_OWNER]: '/owner',
-	[UserRole.PET_NURSE]: '/sitter',
-	[UserRole.PET_HOTEL]: '/hotel',
+	[UserRole.PET_NURSE]: '/sitter/profile',
+	[UserRole.PET_HOTEL]: '/hotel/profile',
 } as const satisfies Record<
 	UserRole.PET_OWNER | UserRole.PET_NURSE | UserRole.PET_HOTEL,
 	Href
