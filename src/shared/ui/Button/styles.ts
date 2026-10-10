@@ -8,6 +8,9 @@ export const styles = StyleSheet.create({
 		padding: 12,
 		borderRadius: 15,
 	},
+	buttonSecondary: {
+		backgroundColor: Colors.buttonSecondary,
+	},
 	buttonFull: {
 		width: '100%',
 	},

@@ -22,9 +22,6 @@ export function StepBackButton({ onPress }: StepBackButtonProps) {
 
 const styles = StyleSheet.create({
 	button: {
-		position: 'absolute',
-		left: 0,
-		zIndex: 1,
 		padding: 4,
 	},
 	pressed: {

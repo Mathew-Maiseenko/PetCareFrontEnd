@@ -8,6 +8,7 @@ export const Colors = {
 	placeholder: '#A8A8A8',
 	borderPrimary: '#A8A8A8',
 	buttonPrimary: '#FEBC46',
+	buttonSecondary: '#F2F2F2',
 	buttonDisabled: '#FEBC4666',
 } as const
 

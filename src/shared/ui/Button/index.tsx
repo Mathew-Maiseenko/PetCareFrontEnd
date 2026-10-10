@@ -7,6 +7,7 @@ export function StyledButton({
 	style,
 	children,
 	full,
+	variant = 'primary',
 	disabled = false,
 	...props
 }: StyledButtonProps) {
@@ -22,6 +23,7 @@ export function StyledButton({
 
 				return [
 					styles.button,
+					variant === 'secondary' && styles.buttonSecondary,
 					full && styles.buttonFull,
 					disabled && styles.buttonDisabled,
 					pressed && !disabled && styles.buttonPressed,

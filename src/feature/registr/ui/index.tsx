@@ -1,17 +1,19 @@
 import { RegistrationStep } from '@/feature/registr/types'
-import StepIndicator from '@/shared/ui/StepIndicator'
 import Logo from '@/shared/ui/Logo'
+import { StepBackButton } from '@/shared/ui/StepBackButton'
+import StepIndicator from '@/shared/ui/StepIndicator'
+import { router } from 'expo-router'
 import { StyleSheet, View } from 'react-native'
 
 import { useRegistrationStore } from '../model'
 import { COUNT_OF_STEPS, getComponentScreenByRoleAndStep } from './steps/config'
-import { StepBackButton } from './steps/shared/step-back-button'
 
 export default function RegistrationScreen() {
 	const { currentStep, setCurrentStep, currentRole } = useRegistrationStore()
 
 	const handlePressBack = () => {
 		if (currentStep === 0) {
+			router.replace('/')
 			return
 		}
 
@@ -21,12 +23,17 @@ export default function RegistrationScreen() {
 	return (
 		<View style={styles.container}>
 			<View style={styles.header}>
-				{currentStep > 0 ? <StepBackButton onPress={handlePressBack} /> : null}
-				<StepIndicator
-					onStepPress={setCurrentStep}
-					totalSteps={COUNT_OF_STEPS}
-					currentStep={currentStep}
-				/>
+				<View style={styles.headerSide}>
+					<StepBackButton onPress={handlePressBack} />
+				</View>
+				<View style={styles.headerCenter}>
+					<StepIndicator
+						onStepPress={setCurrentStep}
+						totalSteps={COUNT_OF_STEPS}
+						currentStep={currentStep}
+					/>
+				</View>
+				<View style={styles.headerSide} />
 			</View>
 			<Logo />
 			{getComponentScreenByRoleAndStep(currentRole, currentStep)}
@@ -44,8 +51,16 @@ const styles = StyleSheet.create({
 	},
 	header: {
 		width: '100%',
-		position: 'relative',
+		flexDirection: 'row',
 		alignItems: 'center',
+	},
+	headerSide: {
+		width: 32,
+		alignItems: 'flex-start',
 		justifyContent: 'center',
+	},
+	headerCenter: {
+		flex: 1,
+		alignItems: 'center',
 	},
 })
