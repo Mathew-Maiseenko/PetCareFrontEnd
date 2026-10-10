@@ -5,6 +5,8 @@ import {
 	SitterStepField,
 	validateSitterStep,
 } from '@/feature/registr/lib/validation/sitter-step'
+import { useFinishRegistration } from '@/feature/registr/lib/finish-registration'
+import { usePersistOnUnmount } from '@/feature/registr/lib/use-persist-on-unmount'
 import { useFieldErrors } from '@/feature/registr/lib/validation/use-field-errors'
 import { useRegistrationStore } from '@/feature/registr/model'
 import { StyledButton } from '@/shared/ui/Button'
@@ -28,8 +30,8 @@ const formatExperience = (years: number) => {
 }
 
 export default function SitterRegistrationStep() {
-	const { sitterData, setSitterData, completeRegistration } =
-		useRegistrationStore()
+	const { sitterData, setSitterData } = useRegistrationStore()
+	const finishRegistration = useFinishRegistration()
 
 	const [experience, setExperience] = useState(
 		formatExperience(sitterData.experienceYears),
@@ -39,6 +41,14 @@ export default function SitterRegistrationStep() {
 	)
 	const [hasEducation, setHasEducation] = useState(sitterData.hasEducation)
 	const { errors, setErrors, updateField } = useFieldErrors<SitterStepField>()
+
+	usePersistOnUnmount(() => {
+		setSitterData({
+			experienceYears: parseExperienceYears(experience),
+			cost: parseCost(cost),
+			hasEducation,
+		})
+	})
 
 	const handleCreate = () => {
 		const validation = validateSitterStep({ experience, cost })
@@ -56,7 +66,7 @@ export default function SitterRegistrationStep() {
 			hasEducation,
 		})
 
-		completeRegistration()
+		finishRegistration()
 	}
 
 	return (

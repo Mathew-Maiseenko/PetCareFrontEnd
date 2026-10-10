@@ -2,6 +2,7 @@ import {
 	CredentialsStepField,
 	validateCredentialsStep,
 } from '@/feature/registr/lib/validation/credentials-step'
+import { usePersistOnUnmount } from '@/feature/registr/lib/use-persist-on-unmount'
 import { useFieldErrors } from '@/feature/registr/lib/validation/use-field-errors'
 import { useRegistrationStore } from '@/feature/registr/model'
 import { StyledButton } from '@/shared/ui/Button'
@@ -29,6 +30,12 @@ export default function CredentialsRegistrationStep() {
 		useState(confirmPassword)
 	const { errors, setErrors, updateField } =
 		useFieldErrors<CredentialsStepField>()
+
+	usePersistOnUnmount(() => {
+		setName(localName)
+		setPassword(localPassword)
+		setConfirmPassword(localConfirmPassword)
+	})
 
 	const handlePressNext = () => {
 		const validation = validateCredentialsStep({

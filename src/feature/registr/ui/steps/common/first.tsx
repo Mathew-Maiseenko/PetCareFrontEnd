@@ -4,6 +4,7 @@ import {
 	FirstStepField,
 	validateFirstStep,
 } from '@/feature/registr/lib/validation/first-step'
+import { usePersistOnUnmount } from '@/feature/registr/lib/use-persist-on-unmount'
 import { useFieldErrors } from '@/feature/registr/lib/validation/use-field-errors'
 import { useRegistrationStore } from '@/feature/registr/model'
 import { StyledButton } from '@/shared/ui/Button'
@@ -17,14 +18,38 @@ import { Field } from '../shared/field'
 import { stepFormStyles } from '../shared/styles'
 
 export default function CommonRegistrationStep() {
-	const { phone, setPhone, setCurrentRole, setCurrentCountry, setCurrentStep } =
-		useRegistrationStore()
+	const {
+		phone,
+		currentRole,
+		currentCountry,
+		setPhone,
+		setCurrentRole,
+		setCurrentCountry,
+		setCurrentStep,
+	} = useRegistrationStore()
 	const [selectedCountryLocal, setSelectedCountryLocal] = useState<UserCountry>(
-		UserCountry.Belarus,
+		currentCountry ?? UserCountry.Belarus,
 	)
-	const [selectedRoleId, setSelectedRoleId] = useState(0)
+	const [selectedRoleId, setSelectedRoleId] = useState(
+		userRolesData.find(role => role.value === currentRole)?.id ?? 0,
+	)
 	const [localPhone, setLocalPhone] = useState(phone)
 	const { errors, setErrors, updateField } = useFieldErrors<FirstStepField>()
+
+	const persistStep = () => {
+		setPhone(localPhone)
+		setCurrentCountry(selectedCountryLocal)
+
+		const selectedRole = userRolesData.find(
+			role => role.id === selectedRoleId,
+		)?.value
+
+		if (selectedRole) {
+			setCurrentRole(selectedRole)
+		}
+	}
+
+	usePersistOnUnmount(persistStep)
 
 	const handlePressNext = () => {
 		const validation = validateFirstStep({

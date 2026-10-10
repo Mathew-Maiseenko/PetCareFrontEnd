@@ -4,6 +4,8 @@ import {
 	OwnerStepField,
 	validateOwnerStep,
 } from '@/feature/registr/lib/validation/owner-step'
+import { useFinishRegistration } from '@/feature/registr/lib/finish-registration'
+import { usePersistOnUnmount } from '@/feature/registr/lib/use-persist-on-unmount'
 import { useFieldErrors } from '@/feature/registr/lib/validation/use-field-errors'
 import { useRegistrationStore } from '@/feature/registr/model'
 import { StyledButton } from '@/shared/ui/Button'
@@ -18,8 +20,8 @@ import { Field } from '../shared/field'
 import { stepFormStyles } from '../shared/styles'
 
 export default function OwnerRegistrationStep() {
-	const { ownerData, setOwnerData, completeRegistration } =
-		useRegistrationStore()
+	const { ownerData, setOwnerData } = useRegistrationStore()
+	const finishRegistration = useFinishRegistration()
 
 	const [petType, setPetType] = useState(ownerData.petType)
 	const [breed, setBreed] = useState(ownerData.breed)
@@ -28,6 +30,15 @@ export default function OwnerRegistrationStep() {
 	)
 	const [hasVaccination, setHasVaccination] = useState(ownerData.hasVaccination)
 	const { errors, setErrors, updateField } = useFieldErrors<OwnerStepField>()
+
+	usePersistOnUnmount(() => {
+		setOwnerData({
+			petType,
+			breed,
+			age: parseAge(age),
+			hasVaccination,
+		})
+	})
 
 	const handleCreate = () => {
 		const validation = validateOwnerStep({ petType, breed, age })
@@ -46,7 +57,7 @@ export default function OwnerRegistrationStep() {
 			hasVaccination,
 		})
 
-		completeRegistration()
+		finishRegistration()
 	}
 
 	return (

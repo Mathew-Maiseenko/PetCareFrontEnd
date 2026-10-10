@@ -1,11 +1,18 @@
-import LogInScreen from '@/feature/log-in/ui'
+import { getRegisteredUser } from '@/feature/registr/lib/storage/get-registered-user'
 import RegistrationScreen from '@/feature/registr/ui'
-import CommonRegistrationStep from '@/feature/registr/ui/steps/common/first'
-
-import { StyleSheet, Text, View } from 'react-native'
+import { getRoleHomeHref } from '@/shared/navigation/role-home'
+import { Redirect } from 'expo-router'
+import { StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 export default function HomeScreen() {
+	const user = getRegisteredUser()
+	const roleHomeHref = user ? getRoleHomeHref(user.role) : null
+
+	if (roleHomeHref) {
+		return <Redirect href={roleHomeHref} />
+	}
+
 	return (
 		<SafeAreaView style={styles.main}>
 			<RegistrationScreen />

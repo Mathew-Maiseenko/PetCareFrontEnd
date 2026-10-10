@@ -3,6 +3,8 @@ import {
 	HotelStepField,
 	validateHotelStep,
 } from '@/feature/registr/lib/validation/hotel-step'
+import { useFinishRegistration } from '@/feature/registr/lib/finish-registration'
+import { usePersistOnUnmount } from '@/feature/registr/lib/use-persist-on-unmount'
 import { useFieldErrors } from '@/feature/registr/lib/validation/use-field-errors'
 import { useRegistrationStore } from '@/feature/registr/model'
 import { StyledButton } from '@/shared/ui/Button'
@@ -15,8 +17,8 @@ import { Field } from '../shared/field'
 import { stepFormStyles } from '../shared/styles'
 
 export default function HotelRegistrationStep() {
-	const { hotelData, setHotelData, completeRegistration } =
-		useRegistrationStore()
+	const { hotelData, setHotelData } = useRegistrationStore()
+	const finishRegistration = useFinishRegistration()
 
 	const [hotelName, setHotelName] = useState(hotelData.hotelName)
 	const [address, setAddress] = useState(hotelData.address)
@@ -27,6 +29,15 @@ export default function HotelRegistrationStep() {
 		hotelData.worksByContract,
 	)
 	const { errors, setErrors, updateField } = useFieldErrors<HotelStepField>()
+
+	usePersistOnUnmount(() => {
+		setHotelData({
+			hotelName,
+			address,
+			cost: cost.trim() ? parseCost(cost) : undefined,
+			worksByContract,
+		})
+	})
 
 	const handleCreate = () => {
 		const validation = validateHotelStep({ hotelName, address, cost })
@@ -45,7 +56,7 @@ export default function HotelRegistrationStep() {
 			worksByContract,
 		})
 
-		completeRegistration()
+		finishRegistration()
 	}
 
 	return (

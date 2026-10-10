@@ -173,7 +173,6 @@ export const useRegistrationStore = create<RegistrationState>()(
 				}
 
 				saveRegisteredUser(registeredUser)
-				get().resetAll()
 
 				return registeredUser
 			},

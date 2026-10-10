@@ -26,4 +26,7 @@ export const storage = {
 
 		return value === 'true'
 	},
+	remove(key: string): void {
+		kvStorage.removeItemSync(key)
+	},
 }
