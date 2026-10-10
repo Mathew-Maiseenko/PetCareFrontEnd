@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native'
 
 export const styles = StyleSheet.create({
 	optionText: {
@@ -6,13 +6,12 @@ export const styles = StyleSheet.create({
 		lineHeight: 26,
 	},
 	list: {
-		width: "100%",
-		gap: 24,
+		width: '100%',
 	},
 	optionContainer: {
-		width: "100%",
-		flexDirection: "row",
-		justifyContent: "space-between",
+		width: '100%',
+		flexDirection: 'row',
+		justifyContent: 'space-between',
 		marginBottom: 8,
 	},
-});
+})

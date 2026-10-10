@@ -6,4 +6,4 @@ export const Gaps = {
 	four: 24,
 	five: 32,
 	six: 64,
-} as const;
+} as const

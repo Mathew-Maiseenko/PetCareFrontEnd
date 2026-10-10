@@ -1,6 +1,6 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native'
 
-import { Colors } from "@/shared/styles";
+import { Colors } from '@/shared/styles'
 
 export const styles = StyleSheet.create({
 	button: {
@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
 		borderRadius: 15,
 	},
 	buttonFull: {
-		width: "100%",
+		width: '100%',
 	},
 	buttonPressed: {
 		opacity: 0.4,
@@ -21,9 +21,9 @@ export const styles = StyleSheet.create({
 		color: Colors.textPrimary,
 		fontWeight: 700,
 		fontSize: 20,
-		textAlign: "center",
+		textAlign: 'center',
 	},
 	textDisabled: {
 		color: Colors.textSecondary,
 	},
-});
+})

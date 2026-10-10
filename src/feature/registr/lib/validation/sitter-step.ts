@@ -1,20 +1,19 @@
-import { validateSitterCost } from "../parsers/cost";
-import { validateExperience } from "../parsers/experience";
-import { ValidationResult } from "./types";
+import { validateSitterCost } from '../parsers/cost'
+import { validateExperience } from '../parsers/experience'
+import { collectFieldErrors, FieldsValidationResult } from './types'
+
+export type SitterStepField = 'experience' | 'cost'
 
 export type SitterStepValues = {
-	experience: string;
-	cost: string;
-};
+	experience: string
+	cost: string
+}
 
 export const validateSitterStep = ({
 	experience,
 	cost,
-}: SitterStepValues): ValidationResult => {
-	const experienceResult = validateExperience(experience);
-	if (!experienceResult.isValid) {
-		return experienceResult;
-	}
-
-	return validateSitterCost(cost);
-};
+}: SitterStepValues): FieldsValidationResult<SitterStepField> =>
+	collectFieldErrors([
+		['experience', validateExperience(experience)],
+		['cost', validateSitterCost(cost)],
+	])

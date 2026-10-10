@@ -1,11 +1,16 @@
-import { validateCredentialsStep } from "@/feature/registr/lib/validation/credentials-step";
-import { useRegistrationStore } from "@/feature/registr/model";
-import { StyledButton } from "@/shared/ui/Button";
-import { StyledInput } from "@/shared/ui/Input";
-import { useMemo, useState } from "react";
-import { Text, View } from "react-native";
+import {
+	CredentialsStepField,
+	validateCredentialsStep,
+} from '@/feature/registr/lib/validation/credentials-step'
+import { useFieldErrors } from '@/feature/registr/lib/validation/use-field-errors'
+import { useRegistrationStore } from '@/feature/registr/model'
+import { StyledButton } from '@/shared/ui/Button'
+import { StyledInput } from '@/shared/ui/Input'
+import { useState } from 'react'
+import { View } from 'react-native'
 
-import { stepFormStyles } from "../shared/styles";
+import { Field } from '../shared/field'
+import { stepFormStyles } from '../shared/styles'
 
 export default function CredentialsRegistrationStep() {
 	const {
@@ -16,73 +21,72 @@ export default function CredentialsRegistrationStep() {
 		setPassword,
 		setConfirmPassword,
 		setCurrentStep,
-	} = useRegistrationStore();
+	} = useRegistrationStore()
 
-	const [localName, setLocalName] = useState(name);
-	const [localPassword, setLocalPassword] = useState(password);
+	const [localName, setLocalName] = useState(name)
+	const [localPassword, setLocalPassword] = useState(password)
 	const [localConfirmPassword, setLocalConfirmPassword] =
-		useState(confirmPassword);
-	const [error, setError] = useState<string | null>(null);
-
-	const isFormValid = useMemo(
-		() =>
-			validateCredentialsStep({
-				name: localName,
-				password: localPassword,
-				confirmPassword: localConfirmPassword,
-			}).isValid,
-		[localName, localPassword, localConfirmPassword],
-	);
+		useState(confirmPassword)
+	const { errors, setErrors, updateField } =
+		useFieldErrors<CredentialsStepField>()
 
 	const handlePressNext = () => {
 		const validation = validateCredentialsStep({
 			name: localName,
 			password: localPassword,
 			confirmPassword: localConfirmPassword,
-		});
+		})
 
 		if (!validation.isValid) {
-			setError(validation.error);
-			return;
+			setErrors(validation.errors)
+			return
 		}
 
-		setError(null);
+		setErrors({})
 
-		setName(localName.trim());
-		setPassword(localPassword);
-		setConfirmPassword(localConfirmPassword);
+		setName(localName.trim())
+		setPassword(localPassword)
+		setConfirmPassword(localConfirmPassword)
 
-		setCurrentStep(2);
-	};
+		setCurrentStep(2)
+	}
 
 	return (
 		<>
 			<View style={stepFormStyles.form}>
-				<StyledInput
-					placeholder="Имя"
-					value={localName}
-					onChangeText={setLocalName}
-					autoCapitalize="words"
-				/>
-				<StyledInput
-					password
-					placeholder="Пароль"
-					value={localPassword}
-					onChangeText={setLocalPassword}
-					secureTextEntry
-				/>
-				<StyledInput
-					password
-					placeholder="Подтверждение пароля"
-					value={localConfirmPassword}
-					onChangeText={setLocalConfirmPassword}
-					secureTextEntry
-				/>
-				{error && <Text style={stepFormStyles.error}>{error}</Text>}
+				<Field error={errors.name}>
+					<StyledInput
+						placeholder='Имя'
+						value={localName}
+						onChangeText={updateField('name', setLocalName)}
+						autoCapitalize='words'
+					/>
+				</Field>
+				<Field error={errors.password}>
+					<StyledInput
+						password
+						placeholder='Пароль'
+						value={localPassword}
+						onChangeText={updateField('password', setLocalPassword)}
+						secureTextEntry
+					/>
+				</Field>
+				<Field error={errors.confirmPassword}>
+					<StyledInput
+						password
+						placeholder='Подтверждение пароля'
+						value={localConfirmPassword}
+						onChangeText={updateField(
+							'confirmPassword',
+							setLocalConfirmPassword,
+						)}
+						secureTextEntry
+					/>
+				</Field>
 			</View>
-			<StyledButton full disabled={!isFormValid} onPress={handlePressNext}>
+			<StyledButton full onPress={handlePressNext}>
 				Далее
 			</StyledButton>
 		</>
-	);
+	)
 }

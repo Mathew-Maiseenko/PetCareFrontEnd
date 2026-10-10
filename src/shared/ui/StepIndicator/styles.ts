@@ -1,10 +1,10 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native'
 
 export const styles = StyleSheet.create({
 	container: {
-		flexDirection: "row",
-		alignItems: "center",
-		justifyContent: "center",
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'center',
 		paddingVertical: 12,
 	},
 	stepWrapper: {
@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
 	stepDot: {
 		width: 12,
 		height: 12,
-		borderRadius: "50%",
+		borderRadius: '50%',
 		borderWidth: 0,
 	},
-});
+})

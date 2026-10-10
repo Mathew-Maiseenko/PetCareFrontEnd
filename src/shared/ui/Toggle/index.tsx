@@ -1,9 +1,9 @@
-import { Switch, Text, View } from "react-native";
+import { Switch, Text, View } from 'react-native'
 
-import { Colors } from "@/shared/styles";
+import { Colors } from '@/shared/styles'
 
-import { styles } from "./styles";
-import { StyledToggleProps } from "./types";
+import { styles } from './styles'
+import { StyledToggleProps } from './types'
 
 export function StyledToggle({
 	value,
@@ -29,5 +29,5 @@ export function StyledToggle({
 				ios_backgroundColor={Colors.placeholder}
 			/>
 		</View>
-	);
+	)
 }

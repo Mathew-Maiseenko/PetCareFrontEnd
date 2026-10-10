@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { Pressable } from "react-native";
+import { useState } from 'react'
+import { Pressable } from 'react-native'
 
-import { Colors } from "@/shared/styles";
+import { Colors } from '@/shared/styles'
 
-import TickIcon from "../Icons/Tick";
+import TickIcon from '../Icons/Tick'
 
-import { styles } from "./styles";
-import { CheckboxProps } from "./types";
+import { styles } from './styles'
+import { CheckboxProps } from './types'
 
 export default function Checkbox({
 	value,
@@ -14,16 +14,16 @@ export default function Checkbox({
 	size = 32,
 	style,
 }: CheckboxProps) {
-	const [internalValue, setInternalValue] = useState(false);
-	const isChecked = value !== undefined ? value : internalValue;
+	const [internalValue, setInternalValue] = useState(false)
+	const isChecked = value !== undefined ? value : internalValue
 
 	const handlePress = () => {
-		const newValue = !isChecked;
+		const newValue = !isChecked
 		if (value === undefined) {
-			setInternalValue(newValue);
+			setInternalValue(newValue)
 		}
-		onValueChange?.(newValue);
-	};
+		onValueChange?.(newValue)
+	}
 
 	return (
 		<Pressable
@@ -45,5 +45,5 @@ export default function Checkbox({
 		>
 			{isChecked && <TickIcon />}
 		</Pressable>
-	);
+	)
 }

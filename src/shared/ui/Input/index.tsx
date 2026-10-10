@@ -1,13 +1,13 @@
-import { useCallback, useState } from "react";
-import { Pressable, TextInput, View } from "react-native";
+import { useCallback, useState } from 'react'
+import { Pressable, TextInput, View } from 'react-native'
 
-import { Colors } from "@/shared/styles";
+import { Colors } from '@/shared/styles'
 
-import EyeClosed from "../Icons/EyeClosed";
-import EyeOpenedIcon from "../Icons/EyeOpened";
+import EyeClosed from '../Icons/EyeClosed'
+import EyeOpenedIcon from '../Icons/EyeOpened'
 
-import { styles } from "./styles";
-import { StyledInputProps } from "./types";
+import { styles } from './styles'
+import { StyledInputProps } from './types'
 
 export function StyledInput({
 	password,
@@ -15,14 +15,14 @@ export function StyledInput({
 	style,
 	...props
 }: StyledInputProps) {
-	const [isPasswordShown, setIsPasswordShown] = useState(false);
+	const [isPasswordShown, setIsPasswordShown] = useState(false)
 
 	const handlePasswordShowingChange = useCallback(
-		() => setIsPasswordShown((shown) => !shown),
+		() => setIsPasswordShown(shown => !shown),
 		[],
-	);
+	)
 
-	const isSecure = password ? !isPasswordShown : secureTextEntry;
+	const isSecure = password ? !isPasswordShown : secureTextEntry
 
 	return (
 		<View style={styles.inputContainer}>
@@ -45,5 +45,5 @@ export function StyledInput({
 				</Pressable>
 			)}
 		</View>
-	);
+	)
 }

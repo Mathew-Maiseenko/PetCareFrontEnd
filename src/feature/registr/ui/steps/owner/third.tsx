@@ -1,88 +1,91 @@
-import { petBreeds } from "@/feature/registr/data";
-import { parseAge } from "@/feature/registr/lib/parsers/age";
-import { validateOwnerStep } from "@/feature/registr/lib/validation/owner-step";
-import { useRegistrationStore } from "@/feature/registr/model";
-import { StyledButton } from "@/shared/ui/Button";
-import StarIcon from "@/shared/ui/Icons/Star";
-import { StyledInput } from "@/shared/ui/Input";
-import { StyledSelectInput } from "@/shared/ui/SelectInput";
-import { StyledToggle } from "@/shared/ui/Toggle";
-import { useMemo, useState } from "react";
-import { Text, View } from "react-native";
+import { petBreeds } from '@/feature/registr/data'
+import { parseAge } from '@/feature/registr/lib/parsers/age'
+import {
+	OwnerStepField,
+	validateOwnerStep,
+} from '@/feature/registr/lib/validation/owner-step'
+import { useFieldErrors } from '@/feature/registr/lib/validation/use-field-errors'
+import { useRegistrationStore } from '@/feature/registr/model'
+import { StyledButton } from '@/shared/ui/Button'
+import StarIcon from '@/shared/ui/Icons/Star'
+import { StyledInput } from '@/shared/ui/Input'
+import { StyledSelectInput } from '@/shared/ui/SelectInput'
+import { StyledToggle } from '@/shared/ui/Toggle'
+import { useState } from 'react'
+import { View } from 'react-native'
 
-import { stepFormStyles } from "../shared/styles";
+import { Field } from '../shared/field'
+import { stepFormStyles } from '../shared/styles'
 
 export default function OwnerRegistrationStep() {
 	const { ownerData, setOwnerData, completeRegistration } =
-		useRegistrationStore();
+		useRegistrationStore()
 
-	const [petType, setPetType] = useState(ownerData.petType);
-	const [breed, setBreed] = useState(ownerData.breed);
+	const [petType, setPetType] = useState(ownerData.petType)
+	const [breed, setBreed] = useState(ownerData.breed)
 	const [age, setAge] = useState(
-		ownerData.age > 0 ? `${ownerData.age} лет` : "",
-	);
-	const [hasVaccination, setHasVaccination] = useState(
-		ownerData.hasVaccination,
-	);
-	const [error, setError] = useState<string | null>(null);
-
-	const isFormValid = useMemo(
-		() => validateOwnerStep({ petType, breed, age }).isValid,
-		[petType, breed, age],
-	);
+		ownerData.age > 0 ? `${ownerData.age} лет` : '',
+	)
+	const [hasVaccination, setHasVaccination] = useState(ownerData.hasVaccination)
+	const { errors, setErrors, updateField } = useFieldErrors<OwnerStepField>()
 
 	const handleCreate = () => {
-		const validation = validateOwnerStep({ petType, breed, age });
+		const validation = validateOwnerStep({ petType, breed, age })
 
 		if (!validation.isValid) {
-			setError(validation.error);
-			return;
+			setErrors(validation.errors)
+			return
 		}
 
-		setError(null);
+		setErrors({})
 
 		setOwnerData({
 			petType: petType.trim(),
 			breed,
 			age: parseAge(age),
 			hasVaccination,
-		});
+		})
 
-		completeRegistration();
-	};
+		completeRegistration()
+	}
 
 	return (
 		<>
 			<View style={stepFormStyles.form}>
-				<StyledInput
-					placeholder="Введите ваше животное"
-					value={petType}
-					onChangeText={setPetType}
-					autoCapitalize="sentences"
-				/>
-				<StyledSelectInput
-					options={[...petBreeds]}
-					selectedValue={breed}
-					onSelectValue={setBreed}
-					placeholder="Порода"
-				/>
-				<StyledInput
-					placeholder="Возраст питомца"
-					value={age}
-					onChangeText={setAge}
-					keyboardType="default"
-				/>
+				<Field error={errors.petType}>
+					<StyledInput
+						placeholder='Введите ваше животное'
+						value={petType}
+						onChangeText={updateField('petType', setPetType)}
+						autoCapitalize='sentences'
+					/>
+				</Field>
+				<Field error={errors.breed}>
+					<StyledSelectInput
+						options={[...petBreeds]}
+						selectedValue={breed}
+						onSelectValue={updateField('breed', setBreed)}
+						placeholder='Порода'
+					/>
+				</Field>
+				<Field error={errors.age}>
+					<StyledInput
+						placeholder='Возраст питомца'
+						value={age}
+						onChangeText={updateField('age', setAge)}
+						keyboardType='default'
+					/>
+				</Field>
 				<StyledToggle
-					label="Есть ли прививка"
+					label='Есть ли прививка'
 					icon={<StarIcon />}
 					value={hasVaccination}
 					onValueChange={setHasVaccination}
 				/>
-				{error && <Text style={stepFormStyles.error}>{error}</Text>}
 			</View>
-			<StyledButton full disabled={!isFormValid} onPress={handleCreate}>
+			<StyledButton full onPress={handleCreate}>
 				Создать
 			</StyledButton>
 		</>
-	);
+	)
 }

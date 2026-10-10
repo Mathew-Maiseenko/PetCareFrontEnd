@@ -1,22 +1,22 @@
-import { TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, View } from 'react-native'
 
-import { Colors } from "@/shared/styles";
+import { Colors } from '@/shared/styles'
 
-import { styles } from "./styles";
-import { StepIndicatorProps } from "./types";
+import { styles } from './styles'
+import { StepIndicatorProps } from './types'
 
 export default function StepIndicator<T extends number>({
 	totalSteps,
 	currentStep,
 	onStepPress,
 }: StepIndicatorProps<T>) {
-	const steps: T[] = Array.from({ length: totalSteps }, (_, i) => i) as T[];
+	const steps: T[] = Array.from({ length: totalSteps }, (_, i) => i) as T[]
 
 	return (
 		<View style={styles.container}>
-			{steps.map((step) => {
-				const isActiveOrDone = step <= currentStep;
-				const isActive = step === currentStep;
+			{steps.map(step => {
+				const isActiveOrDone = step <= currentStep
+				const isActive = step === currentStep
 
 				return (
 					<TouchableOpacity
@@ -24,7 +24,7 @@ export default function StepIndicator<T extends number>({
 						style={styles.stepWrapper}
 						onPress={() => {
 							if (isActiveOrDone) {
-								onStepPress?.(step);
+								onStepPress?.(step)
 							}
 						}}
 						disabled={!onStepPress}
@@ -44,8 +44,8 @@ export default function StepIndicator<T extends number>({
 							]}
 						/>
 					</TouchableOpacity>
-				);
+				)
 			})}
 		</View>
-	);
+	)
 }

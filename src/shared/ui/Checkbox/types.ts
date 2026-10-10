@@ -1,20 +1,20 @@
-import { StyleProp, ViewStyle } from "react-native";
+import { StyleProp, ViewStyle } from 'react-native'
 
 export interface CheckboxProps {
 	/**
 	 * Текущее состояние (true = отмечен)
 	 */
-	value: boolean;
+	value: boolean
 	/**
 	 * Коллбэк при изменении состояния
 	 */
-	onValueChange: (newValue: boolean) => void;
+	onValueChange: (newValue: boolean) => void
 	/**
 	 * Размер чекбокса (по умолчанию 24)
 	 */
-	size?: number;
+	size?: number
 	/**
 	 * Дополнительные стили для контейнера
 	 */
-	style?: StyleProp<ViewStyle>;
+	style?: StyleProp<ViewStyle>
 }

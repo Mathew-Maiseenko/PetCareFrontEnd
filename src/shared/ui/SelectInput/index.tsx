@@ -1,18 +1,12 @@
-import { useCallback, useRef, useState } from "react";
-import {
-	Animated,
-	Pressable,
-	Text,
-	TextInput,
-	View,
-} from "react-native";
+import { useCallback, useRef, useState } from 'react'
+import { Animated, Pressable, Text, TextInput, View } from 'react-native'
 
-import { Colors } from "@/shared/styles";
+import { Colors } from '@/shared/styles'
 
-import ArrowIcon from "../Icons/Arrow";
+import ArrowIcon from '../Icons/Arrow'
 
-import { styles } from "./styles";
-import { StyledSelectInputProps } from "./types";
+import { styles } from './styles'
+import { StyledSelectInputProps } from './types'
 
 export function StyledSelectInput<T extends string>({
 	options,
@@ -21,41 +15,41 @@ export function StyledSelectInput<T extends string>({
 	placeholder,
 	...props
 }: StyledSelectInputProps<T>) {
-	const [isMenuShown, setIsMenuShown] = useState(false);
-	const menuArrowRotation = useRef(new Animated.Value(0)).current;
+	const [isMenuShown, setIsMenuShown] = useState(false)
+	const menuArrowRotation = useRef(new Animated.Value(0)).current
 
 	const toggleMenu = () => {
-		const toValue = isMenuShown ? 0 : 1;
+		const toValue = isMenuShown ? 0 : 1
 
 		Animated.spring(menuArrowRotation, {
 			toValue,
 			friction: 5,
 			tension: 100,
 			useNativeDriver: true,
-		}).start();
-		setIsMenuShown((shown) => !shown);
-	};
+		}).start()
+		setIsMenuShown(shown => !shown)
+	}
 
 	const handleSelectOption = useCallback(
 		(value: T) => {
-			onSelectValue(value);
-			setIsMenuShown(false);
+			onSelectValue(value)
+			setIsMenuShown(false)
 
 			Animated.timing(menuArrowRotation, {
 				toValue: 0,
 				duration: 100,
 				useNativeDriver: true,
-			}).start();
+			}).start()
 		},
 		[onSelectValue],
-	);
+	)
 
-	const hasOptions = options && options.length > 0;
+	const hasOptions = options && options.length > 0
 
 	const rotate = menuArrowRotation.interpolate({
 		inputRange: [0, 1],
-		outputRange: ["0deg", "90deg"],
-	});
+		outputRange: ['0deg', '90deg'],
+	})
 
 	return (
 		<View style={styles.inputContainer}>
@@ -83,7 +77,7 @@ export function StyledSelectInput<T extends string>({
 
 			{isMenuShown && hasOptions && (
 				<View style={styles.menu}>
-					{options.map((option) => (
+					{options.map(option => (
 						<Pressable
 							key={option}
 							style={({ pressed }) => [
@@ -99,5 +93,5 @@ export function StyledSelectInput<T extends string>({
 				</View>
 			)}
 		</View>
-	);
+	)
 }

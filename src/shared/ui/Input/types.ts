@@ -1,3 +1,3 @@
-import { TextInputProps } from "react-native";
+import { TextInputProps } from 'react-native'
 
-export type StyledInputProps = TextInputProps & { password?: boolean };
+export type StyledInputProps = TextInputProps & { password?: boolean }

@@ -1,11 +1,11 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native'
 
-import { Colors } from "@/shared/styles";
+import { Colors } from '@/shared/styles'
 
 export const styles = StyleSheet.create({
 	inputContainer: {
-		width: "100%",
-		position: "relative",
+		width: '100%',
+		position: 'relative',
 		borderColor: Colors.borderPrimary,
 		borderWidth: 1,
 		borderRadius: 10,
@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
 		borderRadius: 10,
 		color: Colors.textPrimary,
 		backgroundColor: Colors.secondaryBackground,
-		width: "100%",
+		width: '100%',
 		height: 55,
 		fontSize: 18,
 		paddingLeft: 20,
@@ -22,10 +22,10 @@ export const styles = StyleSheet.create({
 	},
 
 	rightMenu: {
-		position: "absolute",
+		position: 'absolute',
 		top: 0,
 		right: 15,
-		justifyContent: "center",
-		height: "100%",
+		justifyContent: 'center',
+		height: '100%',
 	},
-});
+})

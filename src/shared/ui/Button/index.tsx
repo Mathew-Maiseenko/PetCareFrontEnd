@@ -1,23 +1,24 @@
-import { Pressable, Text } from "react-native";
+import { Pressable, Text } from 'react-native'
 
-import { styles } from "./styles";
-import { StyledButtonProps } from "./types";
+import { styles } from './styles'
+import { StyledButtonProps } from './types'
 
 export function StyledButton({
 	style,
 	children,
 	full,
-	disabled,
+	disabled = false,
 	...props
 }: StyledButtonProps) {
 	return (
 		<Pressable
+			{...props}
 			disabled={disabled}
 			style={({ pressed, ...otherParams }) => {
 				const userStyle =
-					typeof style === "function"
+					typeof style === 'function'
 						? style({ pressed, ...otherParams })
-						: style;
+						: style
 
 				return [
 					styles.button,
@@ -25,11 +26,10 @@ export function StyledButton({
 					disabled && styles.buttonDisabled,
 					pressed && !disabled && styles.buttonPressed,
 					userStyle,
-				];
+				]
 			}}
-			{...props}
 		>
-			{typeof children === "string" ? (
+			{typeof children === 'string' ? (
 				<Text style={[styles.text, disabled && styles.textDisabled]}>
 					{children}
 				</Text>
@@ -37,5 +37,5 @@ export function StyledButton({
 				children
 			)}
 		</Pressable>
-	);
+	)
 }
