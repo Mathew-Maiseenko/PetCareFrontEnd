@@ -1,15 +1,25 @@
 import { getRoleHomeHref } from '@/shared/navigation/role-home'
 import { router } from 'expo-router'
+import { useFormContext } from 'react-hook-form'
 
-import { useRegistrationStore } from '../model'
+import { userRolesData } from '../data'
+import { completeRegistration } from './registration-form/build-payload'
+import { RegistrationFormValues } from './registration-form/types'
 
 export const useFinishRegistration = () => {
-	const completeRegistration = useRegistrationStore(
-		state => state.completeRegistration,
-	)
+	const { getValues } = useFormContext<RegistrationFormValues>()
 
 	return () => {
-		const user = completeRegistration()
+		const values = getValues()
+		const role = userRolesData.find(
+			item => item.id === values.selectedRoleId,
+		)?.value
+
+		if (!role) {
+			return false
+		}
+
+		const user = completeRegistration(values, role)
 
 		if (!user) {
 			return false
