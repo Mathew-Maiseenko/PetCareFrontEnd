@@ -1,6 +1,9 @@
 import { UserRole } from '@/entity/user/types'
-import { RoleHomeScreen } from '@/feature/home/ui/role-home'
+import { useLogout } from '@/feature/home/lib/logout'
+import { ProfileScreen } from '@/feature/profile/ui/profile-screen'
 
 export default function SitterProfileRoute() {
-	return <RoleHomeScreen role={UserRole.PET_NURSE} title='Зооняня' withTabBar />
+	const logout = useLogout()
+
+	return <ProfileScreen role={UserRole.PET_NURSE} onLogout={logout} />
 }

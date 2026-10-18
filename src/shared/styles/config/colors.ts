@@ -4,6 +4,8 @@ export const Colors = {
 
 	backgroundPrimary: '#ffffff',
 	secondaryBackground: '#ffffff',
+	backgroundGrouped: '#F2F2F2',
+	link: '#007AFF',
 
 	placeholder: '#A8A8A8',
 	borderPrimary: '#A8A8A8',
