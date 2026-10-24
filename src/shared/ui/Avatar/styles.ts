@@ -6,4 +6,8 @@ export const styles = StyleSheet.create({
 	image: {
 		backgroundColor: Colors.buttonSecondary,
 	},
+	fallback: {
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
 })

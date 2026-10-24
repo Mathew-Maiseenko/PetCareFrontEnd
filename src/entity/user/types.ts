@@ -14,8 +14,10 @@ export type ProviderRole = UserRole.PET_NURSE | UserRole.PET_HOTEL
 
 export type UserProfile = {
 	name: string
+	firstName: string
+	birthDate: string
 	phone: string
-	avatarUri: string
+	avatarUri: string | null
 	description: string
 	fullDescription: string
 	rating: number

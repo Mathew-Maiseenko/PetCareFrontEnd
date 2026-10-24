@@ -34,7 +34,14 @@
 					"imageWidth": 76
 				}
 			],
-			"expo-sqlite"
+			"expo-sqlite",
+			[
+				"expo-image-picker",
+				{
+					"photosPermission": "Приложению нужен доступ к галерее, чтобы выбрать фото профиля.",
+					"cameraPermission": "Приложению нужен доступ к камере, чтобы сделать фото профиля."
+				}
+			]
 		],
 		"experiments": {
 			"typedRoutes": true,

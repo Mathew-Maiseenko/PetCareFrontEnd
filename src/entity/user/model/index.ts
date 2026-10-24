@@ -5,6 +5,8 @@ import { ProviderRole, UserProfile, UserRole } from '../types'
 
 const sitterProfile: UserProfile = {
 	name: 'Елена',
+	firstName: 'Елена',
+	birthDate: '01.01.2025',
 	phone: '+3753314642177',
 	avatarUri:
 		'https://img.magnific.com/free-photo/vertical-shot-beautiful-smiling-girl_181624-46009.jpg?semt=ais_hybrid&w=740&q=80',
@@ -21,6 +23,8 @@ const sitterProfile: UserProfile = {
 
 const hotelProfile: UserProfile = {
 	name: 'Кошкин дом',
+	firstName: 'Кошкин дом',
+	birthDate: '',
 	phone: '+375291234567',
 	avatarUri:
 		'https://images.unsplash.com/photo-1574158622682-e40e69881006?w=400&h=400&fit=crop',
@@ -37,15 +41,29 @@ const hotelProfile: UserProfile = {
 
 export type UserProfileState = {
 	profiles: Record<ProviderRole, UserProfile>
+	updateProviderProfile: (
+		role: ProviderRole,
+		patch: Partial<UserProfile>,
+	) => void
 }
 
 export const useUserProfileStore = create<UserProfileState>()(
 	devtools(
-		() => ({
+		set => ({
 			profiles: {
 				[UserRole.PET_NURSE]: sitterProfile,
 				[UserRole.PET_HOTEL]: hotelProfile,
 			},
+			updateProviderProfile: (role, patch) =>
+				set(state => ({
+					profiles: {
+						...state.profiles,
+						[role]: {
+							...state.profiles[role],
+							...patch,
+						},
+					},
+				})),
 		}),
 		{ name: 'UserProfileStore' },
 	),

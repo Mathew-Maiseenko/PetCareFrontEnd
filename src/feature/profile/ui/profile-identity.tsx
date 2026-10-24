@@ -6,7 +6,7 @@ import { styles } from './styles'
 type ProfileIdentityProps = {
 	name: string
 	roleLabel: string
-	avatarUri: string
+	avatarUri: string | null
 }
 
 export function ProfileIdentity({

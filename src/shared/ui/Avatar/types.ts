@@ -1,6 +1,6 @@
 import { ImageProps } from 'react-native'
 
 export type AvatarProps = Omit<ImageProps, 'source'> & {
-	uri: string
+	uri: string | null | undefined
 	size?: number
 }
