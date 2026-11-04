@@ -7,6 +7,7 @@ const mockSitters = [
 	{ id: '3', name: 'Александра', role: 'Зооняня', avatar: 'https://i.pravatar.cc/150?img=5' },
 	{ id: '4', name: 'Игорь', role: 'Зооняня', avatar: 'https://i.pravatar.cc/150?img=13' },
 	{ id: '5', name: 'Мария', role: 'Зооняня', avatar: 'https://i.pravatar.cc/150?img=9' },
+	{ id: '6', name: 'Елена', role: 'Зооняня', avatar: 'https://i.pravatar.cc/150?img=25' },
 ]
 
 export default function SitterList() {
