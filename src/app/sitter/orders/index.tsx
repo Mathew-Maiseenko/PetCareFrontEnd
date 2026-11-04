@@ -1,5 +1,5 @@
-import { RoleSectionScreen } from '@/feature/home/ui/role-section'
+import { OrderPage } from '@/feature/orders/ui/orderPage'
 
 export default function SitterOrdersRoute() {
-	return <RoleSectionScreen title='Зооняня' section='Заказы' />
+    return <OrderPage />
 }

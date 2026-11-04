@@ -46,7 +46,8 @@ const styles = StyleSheet.create({
 	name: { 
         fontSize: 20,
         color: Colors.textPrimary, 
-        marginBottom: 3 
+        marginBottom: 3, 
+        fontWeight: 600
     },
 	role: {
         fontSize: 15,
