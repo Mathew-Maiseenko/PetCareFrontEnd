@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native'
 import { Colors } from '@/shared/styles'
 import SortIcon from '@/shared/ui/Icons/Sort'
 import FilterIcon from '@/shared/ui/Icons/Filter'
+import { router } from 'expo-router'
 
 export function SearchFilters() {
     return (
@@ -11,7 +12,7 @@ export function SearchFilters() {
                     <SortIcon/>
 					<Text style={[styles.text, { marginLeft: 8 }]}>Популярные</Text>
                 </Pressable>
-                <Pressable style={styles.row}>
+                <Pressable style={styles.row} onPress={() => router.push('/pet-owner/search/filter')}>
 					<FilterIcon/>
 					<Text style={[styles.text, { marginLeft: 8 }]}>Фильтры</Text>
 				</Pressable>
