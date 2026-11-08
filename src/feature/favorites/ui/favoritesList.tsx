@@ -71,6 +71,6 @@ const styles = StyleSheet.create({
 	deleteText: {
 		fontSize: 14,
 		color: Colors.textPrimary,
-        fontWeight: 700
+        fontWeight: '700'
 	},
 })
