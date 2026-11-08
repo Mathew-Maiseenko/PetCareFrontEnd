@@ -1,5 +1,6 @@
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { View, Text, Image, StyleSheet, Pressable } from 'react-native'
 import { Colors } from '@/shared/styles'
+import { router } from 'expo-router'
 
 const mockResults = [
 	{ id: '1', name: 'Павел', role: 'Зооняня', avatar: 'https://i.pravatar.cc/150?img=11' },
@@ -13,13 +14,13 @@ export function SearchResults() {
 	return (
 		<View style={styles.container}>
 			{mockResults.map((person) => (
-				<View key={person.id} style={styles.personRow}>
+				<Pressable key={person.id} style={styles.personRow} onPress={() => router.push('/pet-owner/specialist')}>
 					<Image source={{ uri: person.avatar }} style={styles.avatar} />
 					<View style={styles.info}>
 						<Text style={styles.name}>{person.name}</Text>
 						<Text style={styles.role}>{person.role}</Text>
 					</View>
-				</View>
+				</Pressable>
 			))}
 		</View>
 	)
