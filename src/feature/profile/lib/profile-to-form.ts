@@ -1,9 +1,9 @@
-import { UserProfile } from '@/entity/user/types'
+import { UserProfile, UserOwnerProfile } from '@/entity/user/types'
 
 import { ProfileEditFormValues } from './validation/profile-edit'
 
 export const profileToFormValues = (
-	profile: UserProfile,
+	profile: UserProfile | UserOwnerProfile,
 ): ProfileEditFormValues => ({
 	firstName: profile.firstName,
 	birthDate: profile.birthDate,

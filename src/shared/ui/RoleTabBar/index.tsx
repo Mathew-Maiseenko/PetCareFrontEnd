@@ -12,7 +12,7 @@ export function RoleTabBar() {
 	const insets = useSafeAreaInsets()
 	const roleRoot = segments[0]
 
-	if (roleRoot !== 'sitter' && roleRoot !== 'hotel') {
+	if (roleRoot !== 'sitter' && roleRoot !== 'hotel' && roleRoot != 'petowner') {
 		return null
 	}
 

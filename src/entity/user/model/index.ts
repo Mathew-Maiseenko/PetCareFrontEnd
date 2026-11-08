@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
 
-import { ProviderRole, UserProfile, UserRole } from '../types'
+import { ProviderRole, UserOwnerProfile, UserProfile, UserRole } from '../types'
 
 const sitterProfile: UserProfile = {
 	name: 'Елена',
@@ -38,12 +38,25 @@ const hotelProfile: UserProfile = {
 	workCity: 'Минск',
 	priceFrom: 25,
 }
+const ownerProfile: UserOwnerProfile = {
+	name: 'ОКСАНА',
+	firstName: 'ОКСАНА',
+	birthDate: '',
+	phone: '+375331234567',
+	avatarUri:
+		'https://images.unsplash.com/photo-1574158622682-e40e69881006?w=400&h=400&fit=crop',
+}
+
+type SharedProfileFields = Pick<
+	UserProfile,
+	'name' | 'firstName' | 'birthDate' | 'phone' | 'avatarUri'
+>
 
 export type UserProfileState = {
 	profiles: Record<ProviderRole, UserProfile>
 	updateProviderProfile: (
 		role: ProviderRole,
-		patch: Partial<UserProfile>,
+		patch: Partial<SharedProfileFields>,
 	) => void
 }
 
@@ -53,6 +66,7 @@ export const useUserProfileStore = create<UserProfileState>()(
 			profiles: {
 				[UserRole.PET_NURSE]: sitterProfile,
 				[UserRole.PET_HOTEL]: hotelProfile,
+				[UserRole.PET_OWNER]: ownerProfile,
 			},
 			updateProviderProfile: (role, patch) =>
 				set(state => ({
