@@ -1,17 +1,16 @@
 import { View, StyleSheet } from 'react-native'
-import { Calendar, LocaleConfig } from 'react-native-calendars'
+import { Calendar } from 'react-native-calendars'
 
-LocaleConfig.locales['ru'] = {
-    monthNames: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-    monthNamesShort: ['Янв.', 'Фев.', 'Март', 'Апр.', 'Май', 'Июнь', 'Июль', 'Авг.', 'Сент.', 'Окт.', 'Нояб.', 'Дек.'],
-    dayNames: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-    dayNamesShort: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
-    today: 'Сегодня'
-};
-LocaleConfig.defaultLocale = 'ru';
+type Props = { 
+    currentMonth?: string 
+    hideHeader?: boolean
+    onDayPress?: (dateString: string) => void
+    selectedDate?: string | null 
+}
 
-export function SpecialistCalendar() {
-    const markedDates = {
+
+export function SpecialistCalendar({ currentMonth = '2025-12-01', hideHeader = false, onDayPress, selectedDate = null }: Props) {
+    const markedDates: any = {
         '2025-12-17': { selected: true, selectedColor: 'transparent', selectedTextColor: '#000' },
         '2025-12-18': { selected: true, selectedColor: 'transparent', selectedTextColor: '#000' },
         '2025-12-19': { selected: true, selectedColor: 'transparent', selectedTextColor: '#000' },
@@ -25,24 +24,35 @@ export function SpecialistCalendar() {
         '2025-12-29': { selected: true, selectedColor: 'transparent', selectedTextColor: '#000' },
         '2025-12-31': { selected: true, selectedColor: 'transparent', selectedTextColor: '#000' },
     }
-
+    if (selectedDate) {
+        markedDates[selectedDate] = {
+            selected: true,
+            selectedColor: '#FEBC46', 
+            selectedTextColor: '#000' 
+        }
+    }
     return (
         <View style={styles.container}>
             <Calendar
-                current={'2025-12-01'}
+                current={currentMonth}
                 firstDay={1}
                 hideArrows={true}
                 hideExtraDays={true}
                 enableSwipeMonths={false}
                 markedDates={markedDates}
                 renderHeader={() => null}
+                onDayPress={(day) => {
+                    if (onDayPress) {
+                        onDayPress(day.dateString)
+                    }
+                }}
                 theme={{
                     textSectionTitleColor: '#8D8B8B',
                     dayTextColor: '#C4C4C4',
                     textDisabledColor: '#E0E0E0',
                     selectedDayTextColor: '#000',
                     textDayFontSize: 18,
-                    textDayHeaderFontSize: 18,
+                    textDayHeaderFontSize: 16,
 
                     'stylesheet.calendar.main': {
                         container: {
@@ -54,12 +64,22 @@ export function SpecialistCalendar() {
                             marginTop: 2,
                             marginBottom: 2,
                             flexDirection: 'row',
-                            justifyContent: 'space-around',
+                            justifyContent: 'space-between',
                             paddingLeft: 0,
                             paddingRight: 0,
                         }
                     },
-                    'stylesheet.calendar.header': {
+                    'stylesheet.calendar.header': hideHeader ? {
+                        header: { 
+                            display: 'none' 
+                        },
+                        week: { 
+                            display: 'none' 
+                        },
+                        dayHeader: { 
+                            display: 'none' 
+                        },
+                    } : {
                         header: {
                             flexDirection: 'row',
                             justifyContent: 'space-between',
@@ -77,9 +97,9 @@ export function SpecialistCalendar() {
                             paddingRight: 0,
                         },
                         dayHeader: {
-                            width: 32,
+                            width: 24,
                             textAlign: 'center',
-                            fontSize: 18,
+                            fontSize: 16,
                             color: '#8D8B8B',
                         }
                     },
@@ -89,9 +109,11 @@ export function SpecialistCalendar() {
                             height: 32,
                             alignItems: 'center',
                             justifyContent: 'center',
+                            borderRadius: 16,
+
                         },
                         text: {
-                            marginTop: 0,
+                            marginTop: 4,
                             fontSize: 18,
                             color: '#C4C4C4',
                         }

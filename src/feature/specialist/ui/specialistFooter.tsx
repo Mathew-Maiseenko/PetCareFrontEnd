@@ -4,14 +4,15 @@ import { Colors } from '@/shared/styles'
 
 type Props = {
     price: string
+    onPress?: () => void 
 }
 
-export function SpecialistFooter({ price }: Props) {
+export function SpecialistFooter({ price, onPress }: Props) {
     return (
         <View style={styles.footer}>
             <Text style={styles.price}>{price}</Text>
             <View style={styles.buttonWrapper}>
-                <StyledButton>
+                <StyledButton onPress={onPress}>
                     Забронировать
                 </StyledButton>
             </View>

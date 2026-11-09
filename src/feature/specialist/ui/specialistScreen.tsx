@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, StyleSheet } from 'react-native'
+import { View, Text, ScrollView, StyleSheet, Pressable } from 'react-native'
 import { useState } from 'react'
 import { Colors } from '@/shared/styles'
 import { ProfileDescriptionCard } from '@/feature/profile/ui/profile-description-card'
@@ -10,7 +10,8 @@ import { SpecialistRating } from './specialistRating'
 import { SpecialistCalendar } from './specialistCalendar'
 import { SpecialistFooter } from './specialistFooter'
 import SpecialistMenuSheet from './specialistMenuSheet'
-
+import { CalendarSheet } from './calendarSheet'
+import { router } from 'expo-router'
 
 const MOCK_PROFILE = {
     name: 'Алена',
@@ -28,11 +29,15 @@ const MOCK_PROFILE = {
 export function SpecialistScreen() {
     const [isInfoOpen, setIsInfoOpen] = useState(false)
     const [isMenuOpen, setIsMenuOpen] = useState(false)
+    const [isCalendarOpen, setIsCalendarOpen] = useState(false)
+    const [headerHeight, setHeaderHeight] = useState(0) 
     return (
         <View style={styles.container}>
-            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
+            <View style={styles.fixedHeader} onLayout={(event) => setHeaderHeight(event.nativeEvent.layout.height)}>
+                <SpecialistHeader onPressMenu={() => setIsMenuOpen(true)} />
+            </View>
+            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={[styles.scrollContent, { paddingTop: headerHeight - 50 }]}>
                 <View style={[styles.card, styles.headerCard]}>
-                    <SpecialistHeader onPressMenu={() => setIsMenuOpen(true)} />
                     <ProfileIdentity 
                         name="АЛЕНА" 
                         roleLabel="Зооняня" 
@@ -45,17 +50,19 @@ export function SpecialistScreen() {
                         onPressDetails={() => setIsInfoOpen(true)}
                     />
                 </View>
-                <View style={styles.card}>
+                <Pressable style={styles.card} onPress={() => router.push('/pet-owner/reviews')}>
                     <Text style={styles.sectionTitle}>Отзывы</Text>
                     <SpecialistRating rating={5.0} />
-                </View>
-                <View style={styles.calendarCard}>
+                </Pressable>
+                <Pressable style={styles.calendarCard} onPress={() => setIsCalendarOpen(true)}>
                     <View style={styles.calendarHeader}>
                         <Text style={styles.sectionTitle}>Календарь</Text>
                         <Text style={styles.month}>Декабрь</Text>
                     </View>
-                    <SpecialistCalendar />
-                </View>
+                    <View pointerEvents="none"> 
+                        <SpecialistCalendar />
+                    </View>
+                </Pressable>
 
             </ScrollView>
 
@@ -69,6 +76,10 @@ export function SpecialistScreen() {
                 visible={isMenuOpen} 
                 onClose={() => setIsMenuOpen(false)} 
             />
+            <CalendarSheet 
+                visible={isCalendarOpen} 
+                onClose={() => setIsCalendarOpen(false)} 
+            />
         </View>
     )
 }
@@ -77,6 +88,16 @@ const styles = StyleSheet.create({
     container: { 
         flex: 1, 
         backgroundColor: '#F2F2F2' 
+    },
+    fixedHeader: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        paddingTop: 58, 
+        paddingHorizontal: 24,
+        backgroundColor: Colors.backgroundPrimary,
+        zIndex: 10, 
     },
     scrollContent: {
         paddingBottom: 20 

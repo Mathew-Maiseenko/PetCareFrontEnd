@@ -10,7 +10,7 @@ export function SpecialistHeader({ onPressMenu }: Props) {
     return (
         <View style={styles.topBar}>
             <Pressable onPress={() => router.back()}>
-                <BackArrowIcon stroke={Colors.textPrimary} />
+                <BackArrowIcon/>
             </Pressable>
             <View style={styles.topBarRight}>
                 <Pressable>

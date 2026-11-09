@@ -7,7 +7,7 @@ export function SearchHeader() {
     return (
         <View style={styles.container}>
             <Pressable onPress={() => router.back()}>
-                <BackArrowIcon stroke={Colors.textPrimary} />
+                <BackArrowIcon />
             </Pressable>
             <Text style={styles.title}>Поиск</Text>
             <View></View>
