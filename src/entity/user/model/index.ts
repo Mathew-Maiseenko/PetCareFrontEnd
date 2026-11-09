@@ -45,21 +45,21 @@ const hotelProfile: UserProfile = {
 	priceFrom: 25,
 }
 const ownerProfile: UserOwnerProfile = {
-	name: 'ОКСАНА',
-	firstName: 'ОКСАНА',
+	name: 'Оксана',
+	firstName: 'Оксана',
 	birthDate: '',
 	phone: '+375331234567',
 	avatarUri:
-		'https://images.unsplash.com/photo-1574158622682-e40e69881006?w=400&h=400&fit=crop',
+		'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8AeexxOjs4Uc386Cv8RL1q8FmEp6wrvxsZIW8xtSTVw&s=10',
 }
 
 const petProfile: PetProfile = {
-	name: 'ГУДБОЙ',
+	name: 'Гудбой',
 	type: 'Собака',
 	breed: 'Хаски',
 	age: '11 лет',
 	avatarUri:
-		'https://images.unsplash.com/photo-1574158622682-e40e69881006?w=400&h=400&fit=crop',
+		'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJyXRNDfHFpN31XaHpvbe_81Nz9s5V6bi3pZYu2WDLsSg7RWZY8pHsYUxn&s=10',
 	description:
 		'Гудбой — одиннадцатилетний хаски. Его день строится вокруг движения: в 7 утра — короткий выгул, после завтрака...',
 	fullDescription:
