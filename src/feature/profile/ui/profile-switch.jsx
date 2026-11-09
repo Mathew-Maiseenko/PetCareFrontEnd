@@ -1,16 +1,14 @@
 import React, { useState } from 'react'
 import { Text, View, Switch, StyleSheet } from 'react-native'
 
-export function ProfileNotificationsSwitch() {
+export function ProfileSwitch({ caption, text }) {
 	const [isNotificationsEnabled, setIsNotificationsEnabled] = useState(false)
 
 	return (
 		<View style={styles.notificationSection}>
 			<View style={styles.notificationTextContainer}>
-				<Text style={styles.notificationTitle}>Получать уведомления</Text>
-				<Text style={styles.notificationSubtitle}>
-					Получайте уведомления о своем питомце и интересные советы
-				</Text>
+				<Text style={styles.notificationTitle}>{caption}</Text>
+				<Text style={styles.notificationSubtitle}>{text}</Text>
 			</View>
 			<Switch
 				trackColor={{ false: '#D3D3D3', true: '#FEBC46' }}

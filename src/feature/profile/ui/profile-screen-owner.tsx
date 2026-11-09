@@ -1,5 +1,5 @@
 import { useUserProfileStore } from '@/entity/user/model'
-import { ProviderRole } from '@/entity/user/types'
+import { ProviderRole, UserOwnerProfile } from '@/entity/user/types'
 import { useState } from 'react'
 import { ScrollView, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -8,10 +8,11 @@ import { PROVIDER_ROLE_LABEL } from '../lib/role-label'
 import { ProfileHeader } from './profile-header'
 import { ProfileIdentity } from './profile-identity'
 import { ProfilePhone } from './profile-phone'
-import { ProfileNotificationsSwitch } from './profile-notifications-switch'
+import { ProfileSwitch } from './profile-switch'
 import { styles } from './styles'
 import { StyledButton } from '@/shared/ui/Button'
 import { RoleTabBar } from '@/shared/ui/RoleTabBar'
+import { useRouter } from 'expo-router'
 
 type ProfileScreenProps = {
 	role: ProviderRole
@@ -22,6 +23,12 @@ type ProfileScreenProps = {
 
 export function ProfileOwnerScreen({ role, onLogout }: ProfileScreenProps) {
 	const profile = useUserProfileStore(state => state.profiles[role])
+	const typedProfile = profile as UserOwnerProfile
+
+	const router = useRouter()
+	const handleNavigate = () => {
+		router.push('/petowner/profile/petprofile')
+	}
 
 	return (
 		<SafeAreaView style={styles.screen} edges={['top']}>
@@ -29,14 +36,20 @@ export function ProfileOwnerScreen({ role, onLogout }: ProfileScreenProps) {
 				<View style={styles.topBlock}>
 					<ProfileHeader onLogout={onLogout} />
 					<ProfileIdentity
-						name={profile.name}
+						name={typedProfile.name}
 						roleLabel={PROVIDER_ROLE_LABEL[role]}
-						avatarUri={profile.avatarUri}
+						avatarUri={typedProfile.avatarUri}
 					/>
-					<ProfilePhone phone={profile.phone} />
+					<ProfilePhone phone={typedProfile.phone} />
 				</View>
-				<ProfileNotificationsSwitch />
-				<StyledButton style={{ width: '90%', marginLeft: '5%' }}>
+				<ProfileSwitch
+					caption='Получать уведомления'
+					text='Получайте уведомления о своем питомце и интересные советы'
+				/>
+				<StyledButton
+					style={{ width: '90%', marginLeft: '5%' }}
+					onPress={handleNavigate}
+				>
 					Личный кабинет питомца
 				</StyledButton>
 			</ScrollView>

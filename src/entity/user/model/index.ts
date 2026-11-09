@@ -1,7 +1,13 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
 
-import { ProviderRole, UserOwnerProfile, UserProfile, UserRole } from '../types'
+import {
+	PetProfile,
+	ProviderRole,
+	UserOwnerProfile,
+	UserProfile,
+	UserRole,
+} from '../types'
 
 const sitterProfile: UserProfile = {
 	name: 'Елена',
@@ -47,13 +53,28 @@ const ownerProfile: UserOwnerProfile = {
 		'https://images.unsplash.com/photo-1574158622682-e40e69881006?w=400&h=400&fit=crop',
 }
 
+const petProfile: PetProfile = {
+	name: 'ГУДБОЙ',
+	type: 'Собака',
+	breed: 'Хаски',
+	age: '11 лет',
+	avatarUri:
+		'https://images.unsplash.com/photo-1574158622682-e40e69881006?w=400&h=400&fit=crop',
+	description:
+		'Гудбой — одиннадцатилетний хаски. Его день строится вокруг движения: в 7 утра — короткий выгул, после завтрака...',
+	fullDescription:
+		'Гудбой — одиннадцатилетний хаски. Его день строится вокруг движения: в 7 утра — короткий выгул, после завтрака — обязательный час покоя. Главное событие — двухчасовая активная прогулка днём (бег, игры в догонялки, буксировка), без этого он будет грызть всё в квартире. Вечером — спокойный променад. Очень разговорчивый. Обожает рыть ямы и обдумывает побеги при любой возможности — никогда не оставляйте его одного без привязи. Летом нужен постоянный доступ к прохладной воде и тени.',
+	action: 'связаться с хозяином питомца; доставить в вет клинику',
+	vaccination: false,
+}
+
 type SharedProfileFields = Pick<
 	UserProfile,
 	'name' | 'firstName' | 'birthDate' | 'phone' | 'avatarUri'
 >
 
 export type UserProfileState = {
-	profiles: Record<ProviderRole, UserProfile>
+	profiles: Record<ProviderRole, UserProfile | UserOwnerProfile | PetProfile>
 	updateProviderProfile: (
 		role: ProviderRole,
 		patch: Partial<SharedProfileFields>,
@@ -67,6 +88,7 @@ export const useUserProfileStore = create<UserProfileState>()(
 				[UserRole.PET_NURSE]: sitterProfile,
 				[UserRole.PET_HOTEL]: hotelProfile,
 				[UserRole.PET_OWNER]: ownerProfile,
+				[UserRole.PET]: petProfile,
 			},
 			updateProviderProfile: (role, patch) =>
 				set(state => ({
@@ -75,7 +97,7 @@ export const useUserProfileStore = create<UserProfileState>()(
 						[role]: {
 							...state.profiles[role],
 							...patch,
-						},
+						} as UserProfile | UserOwnerProfile | PetProfile,
 					},
 				})),
 		}),

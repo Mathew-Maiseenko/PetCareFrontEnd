@@ -36,3 +36,15 @@ export type UserOwnerProfile = {
 	phone: string
 	avatarUri: string | null
 }
+
+export type PetProfile = {
+	name: string
+	type: string
+	breed: string
+	age: string
+	avatarUri: string | null
+	description: string
+	fullDescription: string
+	action: string
+	vaccination: boolean
+}
