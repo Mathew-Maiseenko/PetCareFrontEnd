@@ -1,4 +1,4 @@
-import { NotificationGroupType } from '../types'
+import { NotificationGroupType, SitterNotificationItem } from '../types'
 
 export const DATA_NOTIFICATIONS: NotificationGroupType[] = [
 	{
@@ -78,5 +78,32 @@ export const DATA_NOTIFICATIONS: NotificationGroupType[] = [
 					'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150&h=150&fit=crop',
 			},
 		],
+	},
+]
+
+export const DATA_SITTER_NOTIFICATIONS: SitterNotificationItem[] = [
+	{
+		id: '1',
+		name: 'Виктория',
+		date: '24.12.2025',
+		time: 'Целый день',
+		avatarUri:
+			'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop',
+	},
+	{
+		id: '2',
+		name: 'Оксана',
+		date: '23.12.2025',
+		time: '12:00 - 20:00',
+		avatarUri:
+			'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop',
+	},
+	{
+		id: '3',
+		name: 'Алина',
+		date: '22.12.2025',
+		time: '12:00 - 20:00',
+		avatarUri:
+			'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&h=150&fit=crop',
 	},
 ]
