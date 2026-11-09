@@ -9,6 +9,7 @@ import { ProfileHeader } from './profile-header'
 import { ProfileIdentity } from './profile-identity'
 import { ProfilePhone } from './profile-phone'
 import { ProfileSwitch } from './profile-switch'
+import { ProfileEditModal } from './profile-edit-modal'
 import { styles } from './styles'
 import { StyledButton } from '@/shared/ui/Button'
 import { RoleTabBar } from '@/shared/ui/RoleTabBar'
@@ -24,6 +25,7 @@ type ProfileScreenProps = {
 export function ProfileOwnerScreen({ role, onLogout }: ProfileScreenProps) {
 	const profile = useUserProfileStore(state => state.profiles[role])
 	const typedProfile = profile as UserOwnerProfile
+	const [isEditOpen, setIsEditOpen] = useState(false)
 
 	const router = useRouter()
 	const handleNavigate = () => {
@@ -34,7 +36,10 @@ export function ProfileOwnerScreen({ role, onLogout }: ProfileScreenProps) {
 		<SafeAreaView style={styles.screen} edges={['top']}>
 			<ScrollView contentContainerStyle={{ gap: 10 }}>
 				<View style={styles.topBlock}>
-					<ProfileHeader onLogout={onLogout} />
+					<ProfileHeader
+						onLogout={onLogout}
+						onPressEdit={() => setIsEditOpen(true)}
+					/>
 					<ProfileIdentity
 						name={typedProfile.name}
 						roleLabel={PROVIDER_ROLE_LABEL[role]}
@@ -54,6 +59,12 @@ export function ProfileOwnerScreen({ role, onLogout }: ProfileScreenProps) {
 				</StyledButton>
 			</ScrollView>
 			<RoleTabBar />
+			<ProfileEditModal
+				visible={isEditOpen}
+				role={role}
+				profile={typedProfile}
+				onClose={() => setIsEditOpen(false)}
+			/>
 		</SafeAreaView>
 	)
 }

@@ -1,5 +1,5 @@
 import { useUserProfileStore } from '@/entity/user/model'
-import { ProviderRole, PetProfile } from '@/entity/user/types'
+import { ProviderRole, PetProfile, UserRole } from '@/entity/user/types'
 import { useState } from 'react'
 import { ScrollView, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -13,6 +13,7 @@ import { ProfileBreedPet } from './profile-breed-pet'
 import { ProfileTypePet } from './profile-type-pet'
 import { ProfileDescriptionCard } from './profile-description-card'
 import { ProfilePetDetailsSheet } from './profile-pet-details-sheet'
+import { ProfilePetEditModal } from './profile-pet-edit-modal'
 import AddPet from '@/shared/ui/Icons/AddPet'
 import { styles } from './styles'
 import { StyledButton } from '@/shared/ui/Button'
@@ -33,6 +34,7 @@ export function ProfilePetScreen({
 	const profile = useUserProfileStore(state => state.profiles[role])
 	const typedProfile = profile as PetProfile
 	const [isDetailsOpen, setIsDetailsOpen] = useState(false)
+	const [isEditOpen, setIsEditOpen] = useState(false)
 
 	const handlePressDetails = () => {
 		onPressDetails?.()
@@ -47,7 +49,10 @@ export function ProfilePetScreen({
 		<SafeAreaView style={styles.screen} edges={['top']}>
 			<ScrollView contentContainerStyle={{ gap: 10 }}>
 				<View style={styles.topBlock}>
-					<ProfileHeader onLogout={onLogout} />
+					<ProfileHeader
+						onLogout={onLogout}
+						onPressEdit={() => setIsEditOpen(true)}
+					/>
 					<ProfileIdentity
 						name={typedProfile.name}
 						roleLabel={PROVIDER_ROLE_LABEL[role]}
@@ -86,6 +91,12 @@ export function ProfilePetScreen({
 				profile={typedProfile}
 			/>
 			<RoleTabBar />
+			<ProfilePetEditModal
+				visible={isEditOpen}
+				role={UserRole.PET}
+				profile={typedProfile}
+				onClose={() => setIsEditOpen(false)}
+			/>
 		</SafeAreaView>
 	)
 }

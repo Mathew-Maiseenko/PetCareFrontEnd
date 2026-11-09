@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Text, View, Switch, StyleSheet } from 'react-native'
+import { Text, View, StyleSheet } from 'react-native'
+import { Switch } from 'react-native-switch'
 
 export function ProfileSwitch({ caption, text }) {
 	const [isNotificationsEnabled, setIsNotificationsEnabled] = useState(false)
@@ -11,10 +12,21 @@ export function ProfileSwitch({ caption, text }) {
 				<Text style={styles.notificationSubtitle}>{text}</Text>
 			</View>
 			<Switch
-				trackColor={{ false: '#D3D3D3', true: '#FEBC46' }}
-				thumbColor={isNotificationsEnabled ? '#FFFFFF' : '#f4f3f4'}
-				onValueChange={() => setIsNotificationsEnabled(!isNotificationsEnabled)}
 				value={isNotificationsEnabled}
+				onValueChange={() => setIsNotificationsEnabled(!isNotificationsEnabled)}
+				circleSize={24}
+				barHeight={32}
+				switchWidthMultiplier={2.6}
+				renderActiveText={false}
+				renderInActiveText={false}
+				circleBorderWidth={0}
+				backgroundActive={'#FEBC46'}
+				backgroundInactive={'#D3D3D3'}
+				circleColorActive={'#FFFFFF'}
+				circleColorInactive={'#FFFFFF'}
+				changeValueImmediately={true}
+				innerCircleStyle={{ alignItems: 'center', justifyContent: 'center' }}
+				switchBorderRadius={30}
 			/>
 		</View>
 	)
