@@ -96,7 +96,7 @@ export const DATA_SITTER_NOTIFICATIONS: SitterNotificationItem[] = [
 		date: '23.12.2025',
 		time: '12:00 - 20:00',
 		avatarUri:
-			'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop',
+			'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8AeexxOjs4Uc386Cv8RL1q8FmEp6wrvxsZIW8xtSTVw&s=10',
 	},
 	{
 		id: '3',

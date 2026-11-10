@@ -2,15 +2,22 @@ import React from 'react'
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native'
 import Reject from '@/shared/ui/Icons/Reject'
 import { StyledButton } from '@/shared/ui/Button'
+import { useRouter } from 'expo-router'
 
 export function NotificationAction() {
+	const router = useRouter()
+	const handleNavigate = () => {
+		router.push('/sitter/petowner')
+	}
 	return (
 		<View style={styles.container}>
 			<TouchableOpacity>
 				<Reject style={styles.rejectButton} />
 			</TouchableOpacity>
 			<TouchableOpacity>
-				<StyledButton style={styles.acceptButton}>Принять</StyledButton>
+				<StyledButton onPress={handleNavigate} style={styles.acceptButton}>
+					Принять
+				</StyledButton>
 			</TouchableOpacity>
 		</View>
 	)
