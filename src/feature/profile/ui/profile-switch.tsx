@@ -2,7 +2,12 @@ import React, { useState } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 import { Switch } from 'react-native-switch'
 
-export function ProfileSwitch({ caption, text }) {
+type ProfileSwitchProps = {
+	caption: string
+	text: string
+}
+
+export function ProfileSwitch({ caption, text }: ProfileSwitchProps) {
 	const [isNotificationsEnabled, setIsNotificationsEnabled] = useState(false)
 
 	return (
@@ -22,8 +27,8 @@ export function ProfileSwitch({ caption, text }) {
 				circleBorderWidth={0}
 				backgroundActive={'#FEBC46'}
 				backgroundInactive={'#D3D3D3'}
-				circleColorActive={'#FFFFFF'}
-				circleColorInactive={'#FFFFFF'}
+				circleActiveColor={'#FFFFFF'}
+				circleInActiveColor={'#FFFFFF'}
 				changeValueImmediately={true}
 				innerCircleStyle={{ alignItems: 'center', justifyContent: 'center' }}
 				switchBorderRadius={30}

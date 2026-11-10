@@ -40,7 +40,7 @@ export function ViewProfilePetScreen({
 	}
 	const router = useRouter()
 	const handleNavigate = () => {
-		router.push('/sitter/petowner')
+		router.push('/sitter/notifications/petowner')
 	}
 
 	return (

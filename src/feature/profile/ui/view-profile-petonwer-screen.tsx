@@ -31,7 +31,7 @@ export function ViewProfileOwnerScreen({ role, onLogout }: ProfileScreenProps) {
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 
 	const handleNavigate = () => {
-		router.push('/sitter/petowner/pet')
+		router.push('/sitter/notifications/petowner/pet')
 	}
 
 	const handleShare = () => {

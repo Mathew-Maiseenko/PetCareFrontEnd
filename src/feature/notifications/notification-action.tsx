@@ -7,7 +7,7 @@ import { useRouter } from 'expo-router'
 export function NotificationAction() {
 	const router = useRouter()
 	const handleNavigate = () => {
-		router.push('/sitter/petowner')
+		router.push('/sitter/notifications/petowner')
 	}
 	return (
 		<View style={styles.container}>
