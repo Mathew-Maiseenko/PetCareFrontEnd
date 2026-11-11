@@ -7,6 +7,7 @@ import TickIcon from '@/shared/ui/Icons/Tick'
 import { Colors } from '@/shared/styles'
 import { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
+import { useRouter } from 'expo-router'
 import {
 	KeyboardAvoidingView,
 	Modal,
@@ -82,6 +83,12 @@ export function ProfilePetEditModal({
 		} as any)
 
 		onClose()
+	}
+
+	const router = useRouter()
+	const handleAddInfo = () => {
+		onClose()
+		router.push('/petowner/profile/petprofile/information')
 	}
 
 	return (
@@ -171,8 +178,8 @@ export function ProfilePetEditModal({
 					</ScrollView>
 
 					<View style={profileEditStyles.footer}>
-						<StyledButton full onPress={handleSubmit(handleSave)}>
-							Сохранить изменения
+						<StyledButton onPress={handleAddInfo}>
+							Дополнить информацию
 						</StyledButton>
 					</View>
 				</KeyboardAvoidingView>
