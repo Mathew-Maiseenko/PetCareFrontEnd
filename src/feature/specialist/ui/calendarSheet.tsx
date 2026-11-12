@@ -50,17 +50,17 @@ export function CalendarSheet({ visible, onClose }: Props) {
                     contentContainerStyle={[styles.scrollContent, { paddingTop: headerHeight }]}>
                     <View style={styles.monthCard}>
                         <Text style={styles.monthTitle}>Ноябрь</Text>
-                        <SpecialistCalendar currentMonth="2025-11-01" hideHeader={true} selectedDate={selectedDate} onDayPress={(date) => setSelectedDate(date)} />
+                        <SpecialistCalendar currentMonth="2026-11-01" hideHeader={true} selectedDate={selectedDate} onDayPress={(date) => setSelectedDate(date)} />
                     </View>
 
                     <View style={styles.monthCard}>
                         <Text style={styles.monthTitle}>Декабрь</Text>
-                        <SpecialistCalendar currentMonth="2025-12-01" hideHeader={true} selectedDate={selectedDate} onDayPress={(date) => setSelectedDate(date)} />
+                        <SpecialistCalendar currentMonth="2026-12-01" hideHeader={true} selectedDate={selectedDate} onDayPress={(date) => setSelectedDate(date)} />
                     </View>
 
                     <View style={styles.monthCard}>
                         <Text style={styles.monthTitle}>Январь</Text>
-                        <SpecialistCalendar currentMonth="2026-01-01" hideHeader={true} selectedDate={selectedDate} onDayPress={(date) => setSelectedDate(date)} />
+                        <SpecialistCalendar currentMonth="2027-01-01" hideHeader={true} selectedDate={selectedDate} onDayPress={(date) => setSelectedDate(date)} />
                     </View>
                 </ScrollView>
                 {selectedDate !== null && selectedDate !== '' && (

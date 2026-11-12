@@ -15,10 +15,10 @@ import { BottomSheetProps } from './types'
 const OPEN_DURATION = 280
 const CLOSE_DURATION = 240
 
-export function BottomSheet({ visible, onClose, children }: BottomSheetProps) {
+export function BottomSheet({ visible, onClose, children, heightFactor = 0.7 }: BottomSheetProps) {
 	const { height } = useWindowDimensions()
 	const insets = useSafeAreaInsets()
-	const sheetHeight = height * 0.7
+	const sheetHeight = height * heightFactor
 	const [rendered, setRendered] = useState(visible)
 	const translateY = useSharedValue(sheetHeight)
 	const overlayOpacity = useSharedValue(0)

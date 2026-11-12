@@ -9,20 +9,20 @@ type Props = {
 }
 
 
-export function SpecialistCalendar({ currentMonth = '2025-12-01', hideHeader = false, onDayPress, selectedDate = null }: Props) {
+export function SpecialistCalendar({ currentMonth = '2026-12-01', hideHeader = false, onDayPress, selectedDate = null }: Props) {
     const markedDates: any = {
-        '2025-12-17': { selected: true, selectedColor: 'transparent', selectedTextColor: '#000' },
-        '2025-12-18': { selected: true, selectedColor: 'transparent', selectedTextColor: '#000' },
-        '2025-12-19': { selected: true, selectedColor: 'transparent', selectedTextColor: '#000' },
-        '2025-12-21': { selected: true, selectedColor: 'transparent', selectedTextColor: '#000' },
-        '2025-12-22': { selected: true, selectedColor: 'transparent', selectedTextColor: '#000' },
-        '2025-12-23': { selected: true, selectedColor: 'transparent', selectedTextColor: '#000' },
-        '2025-12-24': { selected: true, selectedColor: 'transparent', selectedTextColor: '#000' },
-        '2025-12-26': { selected: true, selectedColor: 'transparent', selectedTextColor: '#000' },
-        '2025-12-27': { selected: true, selectedColor: 'transparent', selectedTextColor: '#000' },
-        '2025-12-28': { selected: true, selectedColor: 'transparent', selectedTextColor: '#000' },
-        '2025-12-29': { selected: true, selectedColor: 'transparent', selectedTextColor: '#000' },
-        '2025-12-31': { selected: true, selectedColor: 'transparent', selectedTextColor: '#000' },
+        '2026-12-17': { selected: true, selectedColor: 'transparent', selectedTextColor: '#000' },
+        '2026-12-18': { selected: true, selectedColor: 'transparent', selectedTextColor: '#000' },
+        '2026-12-19': { selected: true, selectedColor: 'transparent', selectedTextColor: '#000' },
+        '2026-12-21': { selected: true, selectedColor: 'transparent', selectedTextColor: '#000' },
+        '2026-12-22': { selected: true, selectedColor: 'transparent', selectedTextColor: '#000' },
+        '2026-12-23': { selected: true, selectedColor: 'transparent', selectedTextColor: '#000' },
+        '2026-12-24': { selected: true, selectedColor: 'transparent', selectedTextColor: '#000' },
+        '2026-12-26': { selected: true, selectedColor: 'transparent', selectedTextColor: '#000' },
+        '2026-12-27': { selected: true, selectedColor: 'transparent', selectedTextColor: '#000' },
+        '2026-12-28': { selected: true, selectedColor: 'transparent', selectedTextColor: '#000' },
+        '2026-12-29': { selected: true, selectedColor: 'transparent', selectedTextColor: '#000' },
+        '2026-12-31': { selected: true, selectedColor: 'transparent', selectedTextColor: '#000' },
     }
     if (selectedDate) {
         markedDates[selectedDate] = {
@@ -51,6 +51,7 @@ export function SpecialistCalendar({ currentMonth = '2025-12-01', hideHeader = f
                     dayTextColor: '#C4C4C4',
                     textDisabledColor: '#E0E0E0',
                     selectedDayTextColor: '#000',
+                    todayTextColor: '#C4C4C4',
                     textDayFontSize: 18,
                     textDayHeaderFontSize: 16,
 
