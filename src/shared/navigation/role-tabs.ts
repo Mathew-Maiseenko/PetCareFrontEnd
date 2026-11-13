@@ -5,6 +5,10 @@ import ProfileIcon from '@/shared/ui/Icons/Profile'
 import { ComponentType } from 'react'
 import { SvgProps } from 'react-native-svg'
 
+export type RoleTabIconProps = SvgProps & {
+	focused?: boolean
+}
+
 export const ROLE_TAB_NAMES = [
 	'profile',
 	'calendar',
@@ -17,7 +21,7 @@ export type RoleTabName = (typeof ROLE_TAB_NAMES)[number]
 export type RoleTabItem = {
 	name: RoleTabName
 	label: string
-	Icon: ComponentType<SvgProps>
+	Icon: ComponentType<RoleTabIconProps>
 }
 
 export const ROLE_TABS: RoleTabItem[] = [

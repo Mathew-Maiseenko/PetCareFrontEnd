@@ -1,4 +1,5 @@
 import StarIcon from '@/shared/ui/Icons/Star'
+import { Colors } from '@/shared/styles'
 import { Text, View } from 'react-native'
 
 import { styles } from './styles'
@@ -28,6 +29,7 @@ export function ProfileRatingCard({
 						key={index}
 						width={22}
 						height={22}
+						color={Colors.iconAccent}
 						opacity={index < filledStars ? 1 : 0.25}
 					/>
 				))}

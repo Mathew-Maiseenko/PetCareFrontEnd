@@ -1,10 +1,24 @@
-import { ROLE_TABS } from '@/shared/navigation/role-tabs'
+import {
+	ROLE_TABS,
+	RoleTabName,
+	RoleTabIconProps,
+} from '@/shared/navigation/role-tabs'
 import { Colors, Gaps } from '@/shared/styles'
 import { Href, router, usePathname, useSegments } from 'expo-router'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 const INACTIVE_COLOR = '#9D9D9D'
+
+const TAB_ICON_SIZE: Record<
+	RoleTabName,
+	Pick<RoleTabIconProps, 'width' | 'height'>
+> = {
+	profile: { width: 34, height: 34 },
+	calendar: { width: 34, height: 34 },
+	orders: { width: 30, height: 28 },
+	notifications: { width: 33, height: 33 },
+}
 
 export function RoleTabBar() {
 	const pathname = usePathname()
@@ -23,7 +37,8 @@ export function RoleTabBar() {
 			{ROLE_TABS.map(tab => {
 				const href = `/${roleRoot}/${tab.name}` as Href
 				const focused = pathname === href || pathname.endsWith(`/${tab.name}`)
-				const color = focused ? Colors.buttonPrimary : INACTIVE_COLOR
+				const color = focused ? Colors.iconAccent : INACTIVE_COLOR
+				const iconSize = TAB_ICON_SIZE[tab.name]
 
 				return (
 					<Pressable
@@ -35,7 +50,12 @@ export function RoleTabBar() {
 						}}
 						style={({ pressed }) => [styles.item, pressed && styles.pressed]}
 					>
-						<tab.Icon color={color} width={28} height={28} />
+						<tab.Icon
+							color={color}
+							focused={focused}
+							width={iconSize.width}
+							height={iconSize.height}
+						/>
 						<Text style={[styles.label, { color }]}>{tab.label}</Text>
 					</Pressable>
 				)

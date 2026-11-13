@@ -1,7 +1,7 @@
 import { Colors } from '@/shared/styles'
 import Svg, { Path, SvgProps } from 'react-native-svg'
 
-const DEFAULT_COLOR = Colors.buttonPrimary
+const DEFAULT_COLOR = Colors.iconAccent
 
 export default function StarIcon({
 	color = DEFAULT_COLOR,
