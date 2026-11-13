@@ -1,5 +1,5 @@
-import { RoleSectionScreen } from '@/feature/home/ui/role-section'
+import { CalendarPageScreen } from '@/feature/calendarPage/ui/calendarPageScreen'
 
 export default function HotelCalendarRoute() {
-	return <RoleSectionScreen title='Зоогостиница' section='Календарь' />
+	return <CalendarPageScreen />
 }
