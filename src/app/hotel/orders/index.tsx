@@ -1,5 +1,5 @@
-import { RoleSectionScreen } from '@/feature/home/ui/role-section'
+import { OrderPage } from '@/feature/orders/ui/orderPage'
 
 export default function HotelOrdersRoute() {
-	return <RoleSectionScreen title='Зоогостиница' section='Заказы' />
+    return <OrderPage />
 }
