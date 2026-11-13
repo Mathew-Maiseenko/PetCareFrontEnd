@@ -17,7 +17,7 @@ const sitterProfile: UserProfile = {
 	rating: 5,
 	reviewsCount: 53,
 	services: ['Груминг', 'дрессировка', 'социализация животных'],
-	workCity: 'Минск',
+	workCities: ['Минск'],
 	priceFrom: 10,
 }
 
@@ -35,7 +35,7 @@ const hotelProfile: UserProfile = {
 	rating: 4.8,
 	reviewsCount: 27,
 	services: ['Передержка', 'выгул', 'ветеринарный контроль'],
-	workCity: 'Минск',
+	workCities: ['Минск'],
 	priceFrom: 25,
 }
 

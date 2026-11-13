@@ -49,7 +49,10 @@ export function ProfileDetailsSheet({
 							label='Услуги'
 							value={profile.services.join(', ')}
 						/>
-						<ProfileDetailsRow label='Города работы' value={profile.workCity} />
+						<ProfileDetailsRow
+							label='Города работы'
+							value={profile.workCities.join(', ')}
+						/>
 						<ProfileDetailsRow
 							label='Цена в час'
 							value={`От ${profile.priceFrom} рублей`}

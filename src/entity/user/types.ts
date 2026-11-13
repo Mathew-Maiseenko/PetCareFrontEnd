@@ -23,6 +23,6 @@ export type UserProfile = {
 	rating: number
 	reviewsCount: number
 	services: string[]
-	workCity: string
+	workCities: string[]
 	priceFrom: number
 }
