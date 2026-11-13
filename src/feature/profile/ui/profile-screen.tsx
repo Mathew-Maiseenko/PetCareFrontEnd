@@ -43,7 +43,7 @@ export function ProfileScreen({
 
 	return (
 		<SafeAreaView style={styles.screen} edges={['top']}>
-			<ScrollView>
+			<ScrollView style={styles.scrollView}>
 				<View style={styles.topBlock}>
 					<ProfileHeader onLogout={onLogout} onPressEdit={handlePressEdit} />
 					<ProfileIdentity
@@ -53,14 +53,16 @@ export function ProfileScreen({
 					/>
 					<ProfilePhone phone={profile.phone} />
 				</View>
-				<ProfileDescriptionCard
-					description={profile.description}
-					onPressDetails={handlePressDetails}
-				/>
-				<ProfileRatingCard
-					rating={profile.rating}
-					reviewsCount={profile.reviewsCount}
-				/>
+				<View style={styles.cardsSection}>
+					<ProfileDescriptionCard
+						description={profile.description}
+						onPressDetails={handlePressDetails}
+					/>
+					<ProfileRatingCard
+						rating={profile.rating}
+						reviewsCount={profile.reviewsCount}
+					/>
+				</View>
 			</ScrollView>
 			<ProfileDetailsSheet
 				visible={isDetailsOpen}

@@ -98,17 +98,17 @@ export function ProfileEditModal({
 							onPress={onClose}
 							hitSlop={8}
 							style={({ pressed }) => [
-								profileEditStyles.headerButton,
+								profileEditStyles.headerButtonLeft,
 								pressed && { opacity: 0.6 },
 							]}
 						>
-							<CloseIcon width={22} height={22} />
+							<CloseIcon width={24} height={24} />
 						</Pressable>
 						<Pressable
 							onPress={handleSubmit(handleSave)}
 							hitSlop={8}
 							style={({ pressed }) => [
-								profileEditStyles.headerButton,
+								profileEditStyles.headerButtonRight,
 								pressed && { opacity: 0.6 },
 							]}
 						>

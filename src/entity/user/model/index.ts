@@ -7,7 +7,7 @@ const sitterProfile: UserProfile = {
 	name: 'Елена',
 	firstName: 'Елена',
 	birthDate: '01.01.2025',
-	phone: '+3753314642177',
+	phone: '+375331464217',
 	avatarUri:
 		'https://img.magnific.com/free-photo/vertical-shot-beautiful-smiling-girl_181624-46009.jpg?semt=ais_hybrid&w=740&q=80',
 	description:
