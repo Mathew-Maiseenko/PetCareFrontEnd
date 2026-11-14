@@ -27,6 +27,7 @@ export function StyledToggle({
 				}}
 				thumbColor={Colors.backgroundPrimary}
 				ios_backgroundColor={Colors.placeholder}
+				style={{ transform: [{ scaleX: 1.4 }, { scaleY: 1.4 }] }} 
 			/>
 		</View>
 	)
