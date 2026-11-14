@@ -1,8 +1,8 @@
-import { ROLE_TABS } from '@/shared/navigation/role-tabs'
 import { Colors, Gaps } from '@/shared/styles'
 import { Href, router, usePathname, useSegments } from 'expo-router'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { ROLE_TABS, OWNER_TABS } from '@/shared/navigation/role-tabs'
 
 const INACTIVE_COLOR = '#9D9D9D'
 
@@ -12,15 +12,19 @@ export function RoleTabBar() {
 	const insets = useSafeAreaInsets()
 	const roleRoot = segments[0]
 
-	if (roleRoot !== 'sitter' && roleRoot !== 'hotel') {
+	if (roleRoot !== 'sitter' && roleRoot !== 'hotel' && roleRoot !== 'pet-owner') {
 		return null
 	}
+	if (pathname.includes('/settings') || pathname.includes('/blocked')) {
+        return null
+    }
+	const tabs = roleRoot === 'pet-owner' ? OWNER_TABS : ROLE_TABS
 
 	return (
 		<View
 			style={[styles.bar, { paddingBottom: Math.max(insets.bottom, Gaps.two) }]}
 		>
-			{ROLE_TABS.map(tab => {
+			{tabs.map(tab => {
 				const href = `/${roleRoot}/${tab.name}` as Href
 				const focused = pathname === href || pathname.endsWith(`/${tab.name}`)
 				const color = focused ? Colors.buttonPrimary : INACTIVE_COLOR
