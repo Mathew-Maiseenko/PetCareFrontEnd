@@ -3,8 +3,10 @@ import { Colors } from '@/shared/styles'
 import SortIcon from '@/shared/ui/Icons/Sort'
 import FilterIcon from '@/shared/ui/Icons/Filter'
 import { router } from 'expo-router'
+import { useState } from 'react'
 
 export function SearchFilters() {
+    const [activeTag, setActiveTag] = useState('Акции')
     return (
         <View style={styles.container}>
             <View style={styles.topRow}>
@@ -18,16 +20,24 @@ export function SearchFilters() {
 				</Pressable>
             </View>
             <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 24 }}>
-				<Pressable style={[styles.tag, styles.tagActive]}>
-                    <Text style={styles.tagTextActive}>Акции</Text>
+				<Pressable 
+                    onPress={() => setActiveTag('Акции')} 
+                    style={[styles.tag, activeTag === 'Акции' && styles.tagActive]}>
+                    <Text style={styles.tagText}>Акции</Text>
                 </Pressable>
-				<Pressable style={styles.tag}>
+				<Pressable 
+                    onPress={() => setActiveTag('Зооняня')} 
+                    style={[styles.tag, activeTag === 'Зооняня' && styles.tagActive]}>
                     <Text style={styles.tagText}>Зооняня</Text>
                 </Pressable>
-				<Pressable style={styles.tag}>
+				<Pressable 
+                    onPress={() => setActiveTag('Зоогостиница')} 
+                    style={[styles.tag, activeTag === 'Зоогостиница' && styles.tagActive]}>
                     <Text style={styles.tagText}>Зоогостинница</Text>
                 </Pressable>
-				<Pressable style={styles.tag}>
+				<Pressable 
+                    onPress={() => setActiveTag('По договору')} 
+                    style={[styles.tag, activeTag === 'По договору' && styles.tagActive]}>
                     <Text style={styles.tagText}>По договору</Text>
                 </Pressable>
 			</ScrollView>
@@ -65,10 +75,6 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.buttonPrimary 
     },
 	tagText: { 
-        fontSize: 14, 
-        color: Colors.textPrimary
-    },
-	tagTextActive: { 
         fontSize: 14, 
         color: Colors.textPrimary
     },
