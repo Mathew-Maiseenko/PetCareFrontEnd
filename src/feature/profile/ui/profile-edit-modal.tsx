@@ -1,10 +1,11 @@
 import { useUserProfileStore } from '@/entity/user/model'
-import { ProviderRole, UserProfile } from '@/entity/user/types'
+import { ProviderRole, UserProfile, UserRole } from '@/entity/user/types'
 import { applyStepErrors } from '@/feature/registr/lib/registration-form/apply-step-errors'
 import { StyledButton } from '@/shared/ui/Button'
 import CloseIcon from '@/shared/ui/Icons/Close'
 import TickIcon from '@/shared/ui/Icons/Tick'
 import { Colors } from '@/shared/styles'
+import { Href, router } from 'expo-router'
 import { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import {
@@ -79,6 +80,12 @@ export function ProfileEditModal({
 		})
 
 		onClose()
+	}
+
+	const handleOpenProfileSetup = () => {
+		const roleRoot = role === UserRole.PET_NURSE ? 'sitter' : 'hotel'
+		onClose()
+		router.push(`/${roleRoot}/profile/setup` as Href)
 	}
 
 	return (
@@ -163,7 +170,7 @@ export function ProfileEditModal({
 					</ScrollView>
 
 					<View style={profileEditStyles.footer}>
-						<StyledButton full onPress={handleSubmit(handleSave)}>
+						<StyledButton full onPress={handleOpenProfileSetup}>
 							Заполнить профиль
 						</StyledButton>
 					</View>

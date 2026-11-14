@@ -25,8 +25,13 @@ export function RoleTabBar() {
 	const segments = useSegments()
 	const insets = useSafeAreaInsets()
 	const roleRoot = segments[0]
+	const hideTabBar = (segments as string[]).includes('setup')
 
 	if (roleRoot !== 'sitter' && roleRoot !== 'hotel') {
+		return null
+	}
+
+	if (hideTabBar) {
 		return null
 	}
 
