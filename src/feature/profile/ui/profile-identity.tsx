@@ -16,7 +16,7 @@ export function ProfileIdentity({
 }: ProfileIdentityProps) {
 	return (
 		<View style={styles.identity}>
-			<Avatar uri={avatarUri} size={112} />
+			<Avatar uri={avatarUri} size={162} />
 			<View style={styles.identityText}>
 				<Text style={styles.name}>{name}</Text>
 				<Text style={styles.role}>{roleLabel}</Text>
