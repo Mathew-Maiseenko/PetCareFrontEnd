@@ -42,13 +42,13 @@ export const styles = StyleSheet.create({
 		gap: Gaps.one,
 	},
 	name: {
-		fontSize: 32,
+		fontSize: 36,
 		fontWeight: 700,
 		color: Colors.textPrimary,
 		fontFamily: Fonts.sans,
 	},
 	role: {
-		fontSize: 16,
+		fontSize: 15,
 		color: Colors.placeholder,
 	},
 	phoneLabel: {
@@ -68,7 +68,7 @@ export const styles = StyleSheet.create({
 		gap: Gaps.two,
 	},
 	cardTitle: {
-		fontSize: 22,
+		fontSize: 20,
 		fontWeight: 700,
 		color: Colors.textPrimary,
 		fontFamily: Fonts.sans,
