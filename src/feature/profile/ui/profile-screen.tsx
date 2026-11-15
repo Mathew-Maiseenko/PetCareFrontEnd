@@ -1,5 +1,5 @@
 import { useUserProfileStore } from '@/entity/user/model'
-import { ProviderRole } from '@/entity/user/types'
+import { ProviderRole, UserProfile } from '@/entity/user/types'
 import { useState } from 'react'
 import { ScrollView, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -30,6 +30,7 @@ export function ProfileScreen({
 	const profile = useUserProfileStore(state => state.profiles[role])
 	const [isDetailsOpen, setIsDetailsOpen] = useState(false)
 	const [isEditOpen, setIsEditOpen] = useState(false)
+	const typedProfile = profile as UserProfile
 
 	const handlePressDetails = () => {
 		onPressDetails?.()
@@ -47,30 +48,30 @@ export function ProfileScreen({
 				<View style={styles.topBlock}>
 					<ProfileHeader onLogout={onLogout} onPressEdit={handlePressEdit} />
 					<ProfileIdentity
-						name={profile.name}
+						name={typedProfile.name}
 						roleLabel={PROVIDER_ROLE_LABEL[role]}
-						avatarUri={profile.avatarUri}
+						avatarUri={typedProfile.avatarUri}
 					/>
-					<ProfilePhone phone={profile.phone} />
+					<ProfilePhone phone={typedProfile.phone} />
 				</View>
 				<ProfileDescriptionCard
-					description={profile.description}
+					description={typedProfile.description}
 					onPressDetails={handlePressDetails}
 				/>
 				<ProfileRatingCard
-					rating={profile.rating}
-					reviewsCount={profile.reviewsCount}
+					rating={typedProfile.rating}
+					reviewsCount={typedProfile.reviewsCount}
 				/>
 			</ScrollView>
 			<ProfileDetailsSheet
 				visible={isDetailsOpen}
 				onClose={() => setIsDetailsOpen(false)}
-				profile={profile}
+				profile={typedProfile}
 			/>
 			<ProfileEditModal
 				visible={isEditOpen}
 				role={role}
-				profile={profile}
+				profile={typedProfile}
 				onClose={() => setIsEditOpen(false)}
 			/>
 		</SafeAreaView>

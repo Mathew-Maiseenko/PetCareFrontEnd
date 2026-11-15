@@ -32,3 +32,7 @@ export default function ShareIcon({
 		</Svg>
 	)
 }
+
+export function Share(props: SvgProps) {
+	return <ShareIcon {...props} />
+}

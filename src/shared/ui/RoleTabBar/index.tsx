@@ -1,10 +1,30 @@
+import { ROLE_TABS, ROLE_TABS_PETOWNER } from '@/shared/navigation/role-tabs'
 import { Colors, Gaps } from '@/shared/styles'
 import { Href, router, usePathname, useSegments } from 'expo-router'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { ROLE_TABS, OWNER_TABS } from '@/shared/navigation/role-tabs'
 
 const INACTIVE_COLOR = '#9D9D9D'
+
+type TabItem = (typeof ROLE_TABS)[number] | (typeof ROLE_TABS_PETOWNER)[number]
+
+const isTabFocused = (pathname: string, href: Href, tabName: string) => {
+	const hrefString = typeof href === 'string' ? href : String(href)
+
+	if (pathname === hrefString || pathname.startsWith(`${hrefString}/`)) {
+		return true
+	}
+
+	if (pathname.endsWith(`/${tabName}`)) {
+		return true
+	}
+
+	if (tabName === 'home' && pathname.startsWith('/pet-owner/main')) {
+		return true
+	}
+
+	return false
+}
 
 export function RoleTabBar() {
 	const pathname = usePathname()
@@ -12,21 +32,30 @@ export function RoleTabBar() {
 	const insets = useSafeAreaInsets()
 	const roleRoot = segments[0]
 
-	if (roleRoot !== 'sitter' && roleRoot !== 'hotel' && roleRoot !== 'pet-owner') {
+	const isProvider = roleRoot === 'sitter' || roleRoot === 'hotel'
+	const isOwner = roleRoot === 'petowner' || roleRoot === 'pet-owner'
+
+	if (!isProvider && !isOwner) {
 		return null
 	}
-	if (pathname.includes('/settings') || pathname.includes('/blocked')) {
-        return null
-    }
-	const tabs = roleRoot === 'pet-owner' ? OWNER_TABS : ROLE_TABS
+
+	if (
+		isOwner &&
+		(pathname.includes('/settings') || pathname.includes('/blocked'))
+	) {
+		return null
+	}
+
+	const tabs: TabItem[] = isOwner ? ROLE_TABS_PETOWNER : ROLE_TABS
 
 	return (
 		<View
 			style={[styles.bar, { paddingBottom: Math.max(insets.bottom, Gaps.two) }]}
 		>
 			{tabs.map(tab => {
-				const href = `/${roleRoot}/${tab.name}` as Href
-				const focused = pathname === href || pathname.endsWith(`/${tab.name}`)
+				const href =
+					tab.href ?? (`/${roleRoot}/${tab.name}` as Href)
+				const focused = isTabFocused(pathname, href, tab.name)
 				const color = focused ? Colors.buttonPrimary : INACTIVE_COLOR
 
 				return (

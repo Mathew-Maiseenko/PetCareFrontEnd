@@ -1,5 +1,9 @@
 import { useUserProfileStore } from '@/entity/user/model'
-import { ProviderRole, UserProfile } from '@/entity/user/types'
+import {
+	ProviderRole,
+	UserProfile,
+	UserOwnerProfile,
+} from '@/entity/user/types'
 import { applyStepErrors } from '@/feature/registr/lib/registration-form/apply-step-errors'
 import { StyledButton } from '@/shared/ui/Button'
 import CloseIcon from '@/shared/ui/Icons/Close'
@@ -17,10 +21,7 @@ import {
 } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
-import {
-	buildDisplayName,
-	profileToFormValues,
-} from '../lib/profile-to-form'
+import { buildDisplayName, profileToFormValues } from '../lib/profile-to-form'
 import {
 	ProfileEditFormValues,
 	validateProfileEditForm,
@@ -32,7 +33,7 @@ import { profileEditStyles } from './profile-edit-styles'
 type ProfileEditModalProps = {
 	visible: boolean
 	role: ProviderRole
-	profile: UserProfile
+	profile: UserProfile | UserOwnerProfile
 	onClose: () => void
 }
 
@@ -46,11 +47,18 @@ export function ProfileEditModal({
 		state => state.updateProviderProfile,
 	)
 
-	const { control, handleSubmit, reset, setError, clearErrors, watch, setValue } =
-		useForm<ProfileEditFormValues>({
-			defaultValues: profileToFormValues(profile),
-			mode: 'onSubmit',
-		})
+	const {
+		control,
+		handleSubmit,
+		reset,
+		setError,
+		clearErrors,
+		watch,
+		setValue,
+	} = useForm<ProfileEditFormValues>({
+		defaultValues: profileToFormValues(profile),
+		mode: 'onSubmit',
+	})
 
 	const avatarUri = watch('avatarUri')
 

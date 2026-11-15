@@ -1,7 +1,13 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
 
-import { ProviderRole, UserProfile, UserRole } from '../types'
+import {
+	PetProfile,
+	ProviderRole,
+	UserOwnerProfile,
+	UserProfile,
+	UserRole,
+} from '../types'
 
 const sitterProfile: UserProfile = {
 	name: 'Елена',
@@ -38,12 +44,40 @@ const hotelProfile: UserProfile = {
 	workCity: 'Минск',
 	priceFrom: 25,
 }
+const ownerProfile: UserOwnerProfile = {
+	name: 'Оксана',
+	firstName: 'Оксана',
+	birthDate: '',
+	phone: '+375331234567',
+	avatarUri:
+		'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8AeexxOjs4Uc386Cv8RL1q8FmEp6wrvxsZIW8xtSTVw&s=10',
+}
+
+const petProfile: PetProfile = {
+	name: 'Гудбой',
+	type: 'Собака',
+	breed: 'Хаски',
+	age: '11 лет',
+	avatarUri:
+		'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJyXRNDfHFpN31XaHpvbe_81Nz9s5V6bi3pZYu2WDLsSg7RWZY8pHsYUxn&s=10',
+	description:
+		'Гудбой — одиннадцатилетний хаски. Его день строится вокруг движения: в 7 утра — короткий выгул, после завтрака...',
+	fullDescription:
+		'Гудбой — одиннадцатилетний хаски. Его день строится вокруг движения: в 7 утра — короткий выгул, после завтрака — обязательный час покоя. Главное событие — двухчасовая активная прогулка днём (бег, игры в догонялки, буксировка), без этого он будет грызть всё в квартире. Вечером — спокойный променад. Очень разговорчивый. Обожает рыть ямы и обдумывает побеги при любой возможности — никогда не оставляйте его одного без привязи. Летом нужен постоянный доступ к прохладной воде и тени.',
+	action: 'связаться с хозяином питомца; доставить в вет клинику',
+	vaccination: false,
+}
+
+type SharedProfileFields = Pick<
+	UserProfile,
+	'name' | 'firstName' | 'birthDate' | 'phone' | 'avatarUri'
+>
 
 export type UserProfileState = {
-	profiles: Record<ProviderRole, UserProfile>
+	profiles: Record<ProviderRole, UserProfile | UserOwnerProfile | PetProfile>
 	updateProviderProfile: (
 		role: ProviderRole,
-		patch: Partial<UserProfile>,
+		patch: Partial<SharedProfileFields>,
 	) => void
 }
 
@@ -53,6 +87,8 @@ export const useUserProfileStore = create<UserProfileState>()(
 			profiles: {
 				[UserRole.PET_NURSE]: sitterProfile,
 				[UserRole.PET_HOTEL]: hotelProfile,
+				[UserRole.PET_OWNER]: ownerProfile,
+				[UserRole.PET]: petProfile,
 			},
 			updateProviderProfile: (role, patch) =>
 				set(state => ({
@@ -61,7 +97,7 @@ export const useUserProfileStore = create<UserProfileState>()(
 						[role]: {
 							...state.profiles[role],
 							...patch,
-						},
+						} as UserProfile | UserOwnerProfile | PetProfile,
 					},
 				})),
 		}),

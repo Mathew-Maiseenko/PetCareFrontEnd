@@ -22,3 +22,7 @@ export default function DotsIcon({
 		</Svg>
 	)
 }
+
+export function Dots(props: SvgProps) {
+	return <DotsIcon {...props} />
+}

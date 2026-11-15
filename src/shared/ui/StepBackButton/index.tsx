@@ -4,17 +4,23 @@ import { Pressable, StyleSheet, View } from 'react-native'
 
 type StepBackButtonProps = {
 	onPress: () => void
+	color?: string
+	rotate?: string
 }
 
-export function StepBackButton({ onPress }: StepBackButtonProps) {
+export function StepBackButton({
+	onPress,
+	color = '#000',
+	rotate = '90deg',
+}: StepBackButtonProps) {
 	return (
 		<Pressable
 			onPress={onPress}
 			hitSlop={12}
 			style={({ pressed }) => [styles.button, pressed && styles.pressed]}
 		>
-			<View style={styles.icon}>
-				<ArrowIcon width={24} height={24} stroke={Colors.textPrimary} />
+			<View style={[{ transform: [{ rotate }] }]}>
+				<ArrowIcon width={24} height={24} stroke={color} />
 			</View>
 		</Pressable>
 	)
@@ -26,8 +32,5 @@ const styles = StyleSheet.create({
 	},
 	pressed: {
 		opacity: 0.4,
-	},
-	icon: {
-		transform: [{ rotate: '90deg' }],
 	},
 })
