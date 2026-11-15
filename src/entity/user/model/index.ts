@@ -13,7 +13,7 @@ const sitterProfile: UserProfile = {
 	name: 'Елена',
 	firstName: 'Елена',
 	birthDate: '01.01.2025',
-	phone: '+3753314642177',
+	phone: '+375331464217',
 	avatarUri:
 		'https://img.magnific.com/free-photo/vertical-shot-beautiful-smiling-girl_181624-46009.jpg?semt=ais_hybrid&w=740&q=80',
 	description:
@@ -23,7 +23,7 @@ const sitterProfile: UserProfile = {
 	rating: 5,
 	reviewsCount: 53,
 	services: ['Груминг', 'дрессировка', 'социализация животных'],
-	workCity: 'Минск',
+	workCities: ['Минск'],
 	priceFrom: 10,
 }
 
@@ -41,7 +41,7 @@ const hotelProfile: UserProfile = {
 	rating: 4.8,
 	reviewsCount: 27,
 	services: ['Передержка', 'выгул', 'ветеринарный контроль'],
-	workCity: 'Минск',
+	workCities: ['Минск'],
 	priceFrom: 25,
 }
 const ownerProfile: UserOwnerProfile = {

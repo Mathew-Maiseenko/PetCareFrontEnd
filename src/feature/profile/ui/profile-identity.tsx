@@ -1,7 +1,7 @@
 import { Avatar } from '@/shared/ui/Avatar'
 import { Text, View } from 'react-native'
 
-import { styles } from './styles'
+import { PROFILE_AVATAR_SIZE, styles } from './styles'
 
 type ProfileIdentityProps = {
 	name: string
@@ -16,7 +16,7 @@ export function ProfileIdentity({
 }: ProfileIdentityProps) {
 	return (
 		<View style={styles.identity}>
-			<Avatar uri={avatarUri} size={162} />
+			<Avatar uri={avatarUri} size={PROFILE_AVATAR_SIZE} />
 			<View style={styles.identityText}>
 				<Text style={styles.name}>{name}</Text>
 				<Text style={styles.role}>{roleLabel}</Text>

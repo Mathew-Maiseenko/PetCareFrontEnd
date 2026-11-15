@@ -1,13 +1,6 @@
 import { Colors } from '@/shared/styles'
-import Svg, {
-	Circle,
-	ClipPath,
-	Defs,
-	G,
-	Path,
-	Rect,
-	SvgProps,
-} from 'react-native-svg'
+import { RoleTabIconProps } from '@/shared/navigation/role-tabs'
+import Svg, { Circle, ClipPath, Defs, G, Path, Rect } from 'react-native-svg'
 
 const DEFAULT_COLOR = Colors.iconAccent
 
@@ -16,7 +9,7 @@ export default function ProfileIcon({
 	width = 34,
 	height = 34,
 	...props
-}: SvgProps) {
+}: RoleTabIconProps) {
 	return (
 		<Svg
 			width={width}

@@ -8,6 +8,10 @@ import { ComponentType } from 'react'
 import { SvgProps } from 'react-native-svg'
 import { Href } from 'expo-router'
 
+export type RoleTabIconProps = SvgProps & {
+	focused?: boolean
+}
+
 export const ROLE_TAB_NAMES = [
 	'profile',
 	'calendar',
@@ -20,7 +24,7 @@ export type RoleTabName = (typeof ROLE_TAB_NAMES)[number]
 export type RoleTabItem = {
 	name: RoleTabName
 	label: string
-	Icon: ComponentType<SvgProps>
+	Icon: ComponentType<RoleTabIconProps>
 	href?: Href
 }
 
@@ -58,7 +62,7 @@ export type RoleTabNamePetOwner = (typeof ROLE_TAB_NAMES_PETOWNER)[number]
 export type RoleTabItemPetOwner = {
 	name: RoleTabNamePetOwner
 	label: string
-	Icon: ComponentType<SvgProps>
+	Icon: ComponentType<RoleTabIconProps>
 	href: Href
 }
 

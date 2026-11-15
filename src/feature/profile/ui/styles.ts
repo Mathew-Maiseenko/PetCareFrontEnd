@@ -2,9 +2,16 @@ import { StyleSheet } from 'react-native'
 
 import { Colors, Fonts, Gaps } from '@/shared/styles'
 
+export const PROFILE_AVATAR_SIZE = 162
+export const PROFILE_CARD_RADIUS = 15
+export const PROFILE_CARD_GAP = 10
+
 export const styles = StyleSheet.create({
 	screen: {
 		flex: 1,
+		backgroundColor: Colors.backgroundPrimary,
+	},
+	scrollView: {
 		backgroundColor: Colors.backgroundGrouped,
 	},
 	topBlock: {
@@ -12,6 +19,7 @@ export const styles = StyleSheet.create({
 		paddingHorizontal: Gaps.four,
 		paddingBottom: Gaps.four,
 		gap: Gaps.four,
+		marginBottom: PROFILE_CARD_GAP,
 	},
 	header: {
 		flexDirection: 'row',
@@ -19,10 +27,9 @@ export const styles = StyleSheet.create({
 		justifyContent: 'space-between',
 	},
 	title: {
-		fontSize: 34,
-		fontWeight: 700,
+		fontSize: 36,
 		color: Colors.textPrimary,
-		fontFamily: Fonts.sans,
+		fontFamily: Fonts.sansBold,
 	},
 	headerActions: {
 		flexDirection: 'row',
@@ -39,39 +46,48 @@ export const styles = StyleSheet.create({
 	},
 	identityText: {
 		flex: 1,
+		alignItems: 'flex-end',
 		gap: Gaps.one,
 	},
 	name: {
 		fontSize: 36,
-		fontWeight: 700,
 		color: Colors.textPrimary,
-		fontFamily: Fonts.sans,
+		fontFamily: Fonts.sansBold,
+		textAlign: 'right',
 	},
 	role: {
 		fontSize: 15,
 		color: Colors.placeholder,
+		fontFamily: Fonts.sans,
+		textAlign: 'right',
 	},
 	phoneLabel: {
-		fontSize: 14,
+		fontSize: 15,
 		color: Colors.placeholder,
+		fontFamily: Fonts.sans,
 	},
 	phoneValue: {
 		fontSize: 20,
 		color: Colors.textPrimary,
+		fontFamily: Fonts.sansBold,
 		marginTop: Gaps.one,
 	},
+	cardsSection: {
+		gap: PROFILE_CARD_GAP,
+		paddingBottom: Gaps.four,
+	},
 	card: {
+		width: '100%',
 		backgroundColor: Colors.backgroundPrimary,
 		paddingHorizontal: Gaps.four,
-		paddingVertical: Gaps.four,
-		marginTop: Gaps.two,
+		paddingVertical: 15,
+		borderRadius: PROFILE_CARD_RADIUS,
 		gap: Gaps.two,
 	},
 	cardTitle: {
 		fontSize: 20,
-		fontWeight: 700,
 		color: Colors.textPrimary,
-		fontFamily: Fonts.sans,
+		fontFamily: Fonts.sansBold,
 	},
 	ratingTitleRow: {
 		flexDirection: 'row',
@@ -79,13 +95,15 @@ export const styles = StyleSheet.create({
 		gap: Gaps.two,
 	},
 	description: {
-		fontSize: 16,
+		fontSize: 15,
 		lineHeight: 22,
 		color: Colors.textPrimary,
+		fontFamily: Fonts.sans,
 	},
 	moreLink: {
-		fontSize: 16,
+		fontSize: 15,
 		color: Colors.link,
+		fontFamily: Fonts.sans,
 	},
 	stars: {
 		flexDirection: 'row',
@@ -93,8 +111,9 @@ export const styles = StyleSheet.create({
 		gap: 4,
 	},
 	reviews: {
-		fontSize: 14,
+		fontSize: 15,
 		color: Colors.placeholder,
+		fontFamily: Fonts.sans,
 	},
 	detailsSheet: {
 		flex: 1,
@@ -108,10 +127,9 @@ export const styles = StyleSheet.create({
 		paddingBottom: Gaps.three,
 	},
 	detailsTitle: {
-		fontSize: 28,
-		fontWeight: 700,
+		fontSize: 36,
 		color: Colors.textPrimary,
-		fontFamily: Fonts.sans,
+		fontFamily: Fonts.sansBold,
 	},
 	detailsScroll: {
 		flex: 1,
@@ -126,9 +144,8 @@ export const styles = StyleSheet.create({
 	},
 	detailsSectionTitle: {
 		fontSize: 20,
-		fontWeight: 700,
 		color: Colors.textPrimary,
-		fontFamily: Fonts.sans,
+		fontFamily: Fonts.sansBold,
 	},
 	detailsRow: {
 		flexDirection: 'row',
@@ -137,17 +154,20 @@ export const styles = StyleSheet.create({
 	},
 	detailsLabel: {
 		flex: 1,
-		fontSize: 16,
+		fontSize: 15,
 		color: Colors.placeholder,
+		fontFamily: Fonts.sans,
 	},
 	detailsValue: {
 		flex: 1.2,
-		fontSize: 16,
+		fontSize: 15,
 		color: Colors.textPrimary,
+		fontFamily: Fonts.sans,
 	},
 	detailsDescription: {
-		fontSize: 16,
+		fontSize: 15,
 		lineHeight: 24,
 		color: Colors.textPrimary,
+		fontFamily: Fonts.sans,
 	},
 })

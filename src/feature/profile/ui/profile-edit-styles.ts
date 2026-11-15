@@ -2,7 +2,9 @@ import { StyleSheet } from 'react-native'
 
 import { Colors, Fonts, Gaps } from '@/shared/styles'
 
-export const AVATAR_SIZE = 120
+import { PROFILE_AVATAR_SIZE } from './styles'
+
+export const AVATAR_SIZE = PROFILE_AVATAR_SIZE
 
 export const profileEditStyles = StyleSheet.create({
 	screen: {
@@ -18,8 +20,14 @@ export const profileEditStyles = StyleSheet.create({
 	},
 	headerButton: {
 		padding: Gaps.one,
-		minWidth: 40,
-		alignItems: 'center',
+	},
+	headerButtonLeft: {
+		padding: Gaps.one,
+		alignItems: 'flex-start',
+	},
+	headerButtonRight: {
+		padding: Gaps.one,
+		alignItems: 'flex-end',
 	},
 	scrollContent: {
 		paddingHorizontal: Gaps.four,
@@ -36,7 +44,7 @@ export const profileEditStyles = StyleSheet.create({
 		gap: Gaps.two,
 	},
 	selectPhotoText: {
-		fontSize: 16,
+		fontSize: 15,
 		color: Colors.iconAccent,
 		fontFamily: Fonts.sans,
 	},
@@ -47,12 +55,14 @@ export const profileEditStyles = StyleSheet.create({
 		marginBottom: Gaps.four,
 	},
 	label: {
-		fontSize: 14,
+		fontSize: 15,
 		color: Colors.placeholder,
+		fontFamily: Fonts.sans,
 	},
 	error: {
 		color: 'red',
-		fontSize: 12,
+		fontSize: 15,
+		fontFamily: Fonts.sans,
 	},
 	footer: {
 		paddingHorizontal: Gaps.four,
@@ -74,9 +84,9 @@ export const profileEditStyles = StyleSheet.create({
 		gap: Gaps.two,
 	},
 	sourceTitle: {
-		fontSize: 18,
-		fontWeight: '600',
+		fontSize: 20,
 		color: Colors.textPrimary,
+		fontFamily: Fonts.sansBold,
 		marginBottom: Gaps.one,
 	},
 	sourceOption: {
@@ -85,8 +95,9 @@ export const profileEditStyles = StyleSheet.create({
 		borderBottomColor: Colors.borderPrimary,
 	},
 	sourceOptionText: {
-		fontSize: 17,
+		fontSize: 15,
 		color: Colors.textPrimary,
+		fontFamily: Fonts.sans,
 		textAlign: 'center',
 	},
 	sourceCancel: {
@@ -94,8 +105,9 @@ export const profileEditStyles = StyleSheet.create({
 		marginTop: Gaps.one,
 	},
 	sourceCancelText: {
-		fontSize: 17,
+		fontSize: 15,
 		color: Colors.placeholder,
+		fontFamily: Fonts.sans,
 		textAlign: 'center',
 	},
 })
