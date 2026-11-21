@@ -1,14 +1,16 @@
 import { Colors } from '@/shared/styles'
 import Svg, { Path, SvgProps } from 'react-native-svg'
+import { RoleTabIconProps } from '@/shared/navigation/role-tabs'
 
 const DEFAULT_COLOR = Colors.icon
 
 export default function HomeIcon({
 	color = DEFAULT_COLOR,
+	focused = false,
 	width = 34,
 	height = 34,
 	...props
-}: SvgProps) {
+}: RoleTabIconProps) {
 	return (
 		<Svg
 			width={width}
@@ -22,6 +24,7 @@ export default function HomeIcon({
 				stroke={color}
 				strokeWidth="2"
 				strokeLinejoin="round"
+				fill={focused ? color : 'none'}
 			/>
 		</Svg>
 	)
