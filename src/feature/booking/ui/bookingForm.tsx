@@ -1,6 +1,6 @@
 import { View, StyleSheet, Alert, Pressable, Text } from 'react-native'
 import { useState } from 'react'
-import { Colors } from '@/shared/styles'
+import { Colors, Fonts } from '@/shared/styles'
 import { StyledButton } from '@/shared/ui/Button'
 import { StyledToggle } from '@/shared/ui/Toggle'
 import { TimePickerModal } from './timePickerModal'
@@ -10,7 +10,6 @@ export function BookingForm() {
     const [activePicker, setActivePicker] = useState<'start' | 'end' | null>(null)
     const [startTime, setStartTime] = useState('')
     const [endTime, setEndTime] = useState('')
-    const isFormValid = isAllDay || (startTime !== '' && endTime !== '')
     const handleBooking = () => {
         if (!isAllDay && startTime >= endTime) {
             Alert.alert("Ошибка", "Время окончания должно быть позже времени начала")
@@ -26,14 +25,11 @@ export function BookingForm() {
             </View>
             {!isAllDay && (
                 <View style={styles.timeInputs}>
-                    {/* Поле НАЧАЛО */}
                     <Pressable style={styles.input} onPress={() => setActivePicker('start')}>
                         <Text style={[styles.inputText, !startTime && styles.placeholder]}>
                             {startTime || 'Начало'}
                         </Text>
                     </Pressable>
-
-                    {/* Поле КОНЕЦ */}
                     <Pressable style={styles.input} onPress={() => setActivePicker('end')}>
                         <Text style={[styles.inputText, !endTime && styles.placeholder]}>
                             {endTime || 'Конец'}
@@ -66,7 +62,8 @@ const styles = StyleSheet.create({
         flex: 1 
     },
     toggleWrapper: { 
-        marginBottom: 16 
+        marginBottom: 16, 
+        fontFamily: Fonts.sans
     },
     timeInputs: { 
         gap: 16 
@@ -81,7 +78,7 @@ const styles = StyleSheet.create({
     },
     inputText: {
         fontSize: 16,
-        fontFamily: 'Nunito-Regular',
+        fontFamily: Fonts.sans,
         color: Colors.textPrimary,
     },
     placeholder: {

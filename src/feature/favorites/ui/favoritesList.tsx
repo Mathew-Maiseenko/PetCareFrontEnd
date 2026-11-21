@@ -1,5 +1,5 @@
 import { View, Text, Image, StyleSheet, Pressable, ScrollView } from 'react-native'
-import { Colors } from '@/shared/styles'
+import { Colors, Fonts } from '@/shared/styles'
 
 const mockFavorites = [
     { id: '1', name: 'Алена', role: 'Зооняня', avatar: 'https://i.pravatar.cc/150?img=25' },
@@ -54,12 +54,14 @@ const styles = StyleSheet.create({
 	},
 	name: {
 		fontSize: 20,
+		fontFamily: Fonts.sansBold,
 		color: Colors.textPrimary,
 		marginBottom: 3,
         fontWeight: 600
 	},
 	role: {
 		fontSize: 15,
+		fontFamily: Fonts.sans,
 		color: Colors.placeholder,
 	},
 	deleteButton: {
@@ -70,7 +72,7 @@ const styles = StyleSheet.create({
 	},
 	deleteText: {
 		fontSize: 14,
-		color: Colors.textPrimary,
-        fontWeight: '700'
+		fontFamily: Fonts.sansBold,
+		color: Colors.textPrimary
 	},
 })

@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, TextInput, Pressable } from 'react-native'
 import { router } from 'expo-router'
-import { Colors } from '@/shared/styles'
+import { Colors, Fonts } from '@/shared/styles'
 import CloseIcon from '@/shared/ui/Icons/CloseInInput'
 import { StyledButton } from '@/shared/ui/Button'
 import { StyledToggle } from '@/shared/ui/Toggle'
@@ -98,16 +98,16 @@ const styles = StyleSheet.create({
     headerTitle: {
         fontSize: 24,
         color: Colors.textPrimary,
-        fontWeight: 700,
+        fontFamily: Fonts.sansBold
     },
     section: {
-        marginBottom: 40,
+        marginBottom: 50,
     },
     sectionTitle: {
         fontSize: 20,
         color: Colors.textPrimary,
         marginBottom: 6,
-        fontWeight: 700,
+        fontFamily: Fonts.sansBold
     },
     row: {
         flexDirection: 'row',
@@ -118,6 +118,7 @@ const styles = StyleSheet.create({
     },
     label: {
         fontSize: 15,
+        fontFamily: Fonts.sans,
         color: Colors.placeholder,
         marginBottom: 2,
     },
@@ -128,6 +129,7 @@ const styles = StyleSheet.create({
         height: 40,
         paddingHorizontal: 12,
         fontSize: 15,
+        fontFamily: Fonts.sans,
         color: Colors.textPrimary
 
     },
@@ -142,6 +144,7 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 18,
+        fontFamily: Fonts.sans,
         color: Colors.textPrimary,
     },
     footer: {

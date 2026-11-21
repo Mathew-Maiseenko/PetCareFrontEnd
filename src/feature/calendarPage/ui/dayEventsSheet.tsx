@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, Pressable } from 'react-native'
 import { BottomSheet } from '@/shared/ui/BottomSheet'
 import CloseIcon from '@/shared/ui/Icons/Close'
 import PlusIcon from '@/shared/ui/Icons/Plus'
-import { Colors } from '@/shared/styles'
+import { Colors, Fonts } from '@/shared/styles'
 import { router } from 'expo-router'
 
 const EVENTS_BY_DATE: Record<string, { id: string, name: string, time: string }[]> = {
@@ -31,6 +31,7 @@ export function DayEventsSheet({ visible, onClose, date }: Props) {
     const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
     const [year, month, day] = date.split('-')
     const formattedDate = `${parseInt(day)} ${months[parseInt(month) - 1]}`
+    const urlDate = `${day}.${month}.${year}`
     const events = EVENTS_BY_DATE[date] || []
     const hasEvents = events.length > 0
     return (
@@ -52,7 +53,7 @@ export function DayEventsSheet({ visible, onClose, date }: Props) {
                     ))}
                 </View>
                 )}
-                <Pressable style={styles.addButton} onPress={() => router.push(`/sitter/dayEventsBooking?date=${date}`)}>
+                <Pressable style={styles.addButton} onPress={() => router.push(`/sitter/dayEventsBooking?date=${urlDate}`)}>
                     <Text style={styles.addText}>Добавить событие</Text>
                     <PlusIcon width={30} height={30}/>
                 </Pressable>
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 24,
-        fontWeight: '700',
+        fontFamily: Fonts.sansBold,
         color: Colors.textPrimary,
     },
     eventsList: {
@@ -88,12 +89,12 @@ const styles = StyleSheet.create({
     },
     eventName: {
         fontSize: 20,
-        fontWeight: '600',
+        fontFamily: Fonts.sans,
         color: Colors.textPrimary,
     },
     eventTime: {
         fontSize: 15,
-        fontFamily: 'Nunito-Regular',
+        fontFamily: Fonts.sans,
         color: Colors.textPrimary,
     },
     addButton: {
@@ -103,7 +104,7 @@ const styles = StyleSheet.create({
     },
     addText: {
         fontSize: 20,
-        fontWeight: '700',
+        fontFamily: Fonts.sansBold,
         color: Colors.textPrimary,
     }
 })

@@ -54,7 +54,8 @@ export function SpecialistCalendar({ currentMonth = '2026-12-01', hideHeader = f
                     todayTextColor: '#C4C4C4',
                     textDayFontSize: 18,
                     textDayHeaderFontSize: 16,
-
+                    textDayFontFamily: 'Nunito_500Medium',
+                    textDayHeaderFontFamily: 'Nunito_500Medium',
                     'stylesheet.calendar.main': {
                         container: {
                             paddingLeft: 0,

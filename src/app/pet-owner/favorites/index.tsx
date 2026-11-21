@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, ScrollView } from 'react-native'
-import { Colors } from '@/shared/styles'
+import { Colors, Fonts } from '@/shared/styles'
 import { FavoritesList } from '@/feature/favorites/ui/favoritesList'
 
 export default function FavoritesScreen() {
@@ -21,9 +21,9 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 24,
+        fontFamily: Fonts.sansBold,
         color: Colors.textPrimary,
         paddingHorizontal: 24,
-        marginBottom: 40,
-		fontWeight: 700
+        marginBottom: 40
     },
 })

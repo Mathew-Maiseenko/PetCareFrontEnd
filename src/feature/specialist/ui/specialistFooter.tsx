@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from 'react-native'
 import { StyledButton } from '@/shared/ui/Button'
-import { Colors } from '@/shared/styles'
+import { Colors, Fonts } from '@/shared/styles'
 
 type Props = {
     price: string
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     },
     price: { 
         fontSize: 20, 
-        fontWeight: '700',
+        fontFamily: Fonts.sansBold,
         color: Colors.textPrimary, 
         marginBottom: 12 
     },

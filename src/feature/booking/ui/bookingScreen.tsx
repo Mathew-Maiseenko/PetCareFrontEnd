@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, Pressable, TextInput } from 'react-native'
 import { router, useLocalSearchParams } from 'expo-router'
-import { Colors } from '@/shared/styles'
+import { Colors, Fonts } from '@/shared/styles'
 import BackArrowIcon from '@/shared/ui/Icons/BackButton'
 import { BookingForm } from './bookingForm'
 
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     },
     headerTitle: {
         fontSize: 24,
-        fontWeight: '700',
+        fontFamily: Fonts.sansBold,
         color: Colors.textPrimary,
     },
     input: {
@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
         height: 50,
         paddingHorizontal: 16,
         fontSize: 16,
+        fontFamily: Fonts.sans,
         color: Colors.textPrimary,
         marginBottom: 16,
     },

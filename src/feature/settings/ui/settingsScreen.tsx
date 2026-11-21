@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, Pressable, ScrollView } from 'react-native'
 import { router } from 'expo-router'
-import { Colors } from '@/shared/styles'
+import { Colors, Fonts } from '@/shared/styles'
 import BackArrowIcon from '@/shared/ui/Icons/BackButton'
 import BlockIcon from '@/shared/ui/Icons/Block'
 import { StyledButton } from '@/shared/ui/Button'
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     },
     headerTitle: {
         fontSize: 24,
-        fontWeight: '700',
+        fontFamily: Fonts.sansBold,
         color: Colors.textPrimary,
     },
     row: {
@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
     rowText: {
         flex: 1,
         fontSize: 20,
+        fontFamily: Fonts.sans,
         color: Colors.textPrimary,
         marginLeft: 16,
     },

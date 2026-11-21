@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from 'react-native'
 import StarIcon from '@/shared/ui/Icons/Star'
-import { Colors } from '@/shared/styles'
+import { Colors, Fonts } from '@/shared/styles'
 
 type Props = {
     rating: number
@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     },
     ratingValue: { 
         fontSize: 20,
+        fontFamily: Fonts.sans,
         color: Colors.textPrimary 
     },
     starsRow: { 

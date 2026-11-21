@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Modal, Pressable } from 'react-native'
-import { Colors } from '@/shared/styles'
+import { Colors, Fonts } from '@/shared/styles'
 import ShareIcon from '@/shared/ui/Icons/Share'
 import BlockIcon from '@/shared/ui/Icons/Block'
 
@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 16,
+        fontFamily: Fonts.sans,
         color: Colors.textPrimary,
     }
 })

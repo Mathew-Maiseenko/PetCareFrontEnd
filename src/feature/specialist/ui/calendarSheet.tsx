@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, Pressable, ScrollView } from 'react-native'
 import { BottomSheet } from '@/shared/ui/BottomSheet'
 import CloseIcon from '@/shared/ui/Icons/Close'
-import { Colors } from '@/shared/styles'
+import { Colors, Fonts } from '@/shared/styles'
 import { SpecialistCalendar } from './specialistCalendar'
 import { LocaleConfig } from 'react-native-calendars'
 import { useState } from 'react'
@@ -111,8 +111,8 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 24,
-        color: Colors.textPrimary,
-        fontWeight: '700'
+        fontFamily: Fonts.sansBold,
+        color: Colors.textPrimary
     },
     weekDaysRow: {
         flexDirection: 'row',
@@ -123,6 +123,7 @@ const styles = StyleSheet.create({
         width: 24,
         textAlign: 'center',
         fontSize: 16,
+        fontFamily: Fonts.sans,
         color: '#8D8B8B',
     },
     scrollContent: {
@@ -137,9 +138,9 @@ const styles = StyleSheet.create({
     },
     monthTitle: {
         fontSize: 20,
+        fontFamily: Fonts.sansBold,
         color: Colors.textPrimary,
         marginBottom: 7,
-        paddingHorizontal: 24,
-        fontWeight: '700'
+        paddingHorizontal: 24
     }
 })

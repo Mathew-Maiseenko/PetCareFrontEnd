@@ -1,5 +1,5 @@
 import { View, Text, Image, StyleSheet, Pressable } from 'react-native'
-import { Colors } from '@/shared/styles'
+import { Colors, Fonts } from '@/shared/styles'
 import { router } from 'expo-router'
 
 const mockResults = [
@@ -46,12 +46,14 @@ const styles = StyleSheet.create({
     },
 	name: { 
         fontSize: 20,
+		fontFamily: Fonts.sansBold,
         color: Colors.textPrimary, 
         marginBottom: 3, 
         fontWeight: 600
     },
 	role: {
         fontSize: 15,
+		fontFamily: Fonts.sans,
         color: Colors.textSecondary,
     },
 })

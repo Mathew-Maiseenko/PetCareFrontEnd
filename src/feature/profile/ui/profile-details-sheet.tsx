@@ -47,11 +47,11 @@ export function ProfileDetailsSheet({
 						<Text style={styles.detailsSectionTitle}>Мои услуги</Text>
 						<ProfileDetailsRow
 							label='Услуги'
-							value={profile.services.join(', ')}
+							value={profile.services?.join(', ') || 'Не указаны'}
 						/>
 						<ProfileDetailsRow
 							label='Города работы'
-							value={profile.workCities.join(', ')}
+							value={profile.workCities?.join(', ') || 'Не указаны'}
 						/>
 						<ProfileDetailsRow
 							label='Цена в час'

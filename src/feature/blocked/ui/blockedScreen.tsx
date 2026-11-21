@@ -1,6 +1,6 @@
 import { View, Text, Image, StyleSheet, Pressable, ScrollView } from 'react-native'
 import { router } from 'expo-router'
-import { Colors } from '@/shared/styles'
+import { Colors, Fonts } from '@/shared/styles'
 import BackArrowIcon from '@/shared/ui/Icons/BackButton'
 
 const BLOCKED_USERS = [
@@ -10,7 +10,6 @@ const BLOCKED_USERS = [
 export function BlockedScreen() {
     return (
         <View style={styles.screen}>
-            {/* Шапка экрана */}
             <View style={styles.header}>
                 <Pressable onPress={() => router.back()}>
                     <BackArrowIcon/>
@@ -56,7 +55,7 @@ const styles = StyleSheet.create({
     },
     headerTitle: {
         fontSize: 24,
-        fontWeight: '700',
+        fontFamily: Fonts.sansBold,
         color: Colors.textPrimary,
     },
     container: {
@@ -85,12 +84,13 @@ const styles = StyleSheet.create({
     },
     name: {
         fontSize: 20,
-        fontWeight: 600,
+        fontFamily: Fonts.sansBold,
         color: Colors.textPrimary,
         marginBottom: 3,
     },
     role: {
         fontSize: 15,
+        fontFamily: Fonts.sans,
         color: Colors.placeholder,
     },
     unblockButton: {
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     },
     unblockText: {
         fontSize: 14,
-		color: Colors.textPrimary,
-        fontWeight: '700'
+        fontFamily: Fonts.sansBold,
+		color: Colors.textPrimary
     },
 })

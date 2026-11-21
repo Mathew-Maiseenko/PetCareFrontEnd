@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Pressable, ScrollView } from 'react-native'
-import { Colors } from '@/shared/styles'
+import { Colors, Fonts } from '@/shared/styles'
 import { CalendarGrid } from './calendarGrid'
 import { useState } from 'react'
 import { DayEventsSheet } from './dayEventsSheet'
@@ -81,8 +81,8 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 24,
-        color: Colors.textPrimary,
-        fontWeight: '700'
+        fontFamily: Fonts.sansBold,
+        color: Colors.textPrimary
     },
     weekDaysRow: {
         flexDirection: 'row',
@@ -93,6 +93,7 @@ const styles = StyleSheet.create({
         width: 24,
         textAlign: 'center',
         fontSize: 16,
+        fontFamily: Fonts.sans,
         color: Colors.placeholder,
     },
     scrollContent: {
@@ -107,9 +108,9 @@ const styles = StyleSheet.create({
     },
     monthTitle: {
         fontSize: 20,
+        fontFamily: Fonts.sansBold,
         color: Colors.textPrimary,
         marginBottom: 7,
-        paddingHorizontal: 24,
-        fontWeight: '700'
+        paddingHorizontal: 24
     }
 })

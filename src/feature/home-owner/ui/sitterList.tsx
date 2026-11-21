@@ -1,5 +1,5 @@
 import { View, Text, Image, StyleSheet, Pressable } from 'react-native'
-import { Colors } from '@/shared/styles'
+import { Colors, Fonts } from '@/shared/styles'
 
 const mockSitters = [
 	{ id: '1', name: 'Павел', role: 'Зооняня', avatar: 'https://i.pravatar.cc/150?img=11' },
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
 	},
 	title: {
 		fontSize: 24,
-		fontWeight: '700',
+		fontFamily: Fonts.sansBold,
 		color: Colors.textPrimary,
 		marginBottom: 26,
 	},
@@ -62,12 +62,13 @@ const styles = StyleSheet.create({
 	},
 	personName: {
 		fontSize: 20,
-		fontWeight: '600',
+		fontFamily: Fonts.sansBold,
 		color: Colors.textPrimary,
 		marginBottom: 3,
 	},
 	personRole: {
 		fontSize: 15,
+		fontFamily: Fonts.sans,
 		color: Colors.textSecondary,
 	},
 })

@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, Pressable, ScrollView, Image } from 'react-native'
 import BackArrowIcon from '@/shared/ui/Icons/BackButton'
 import StarIcon from '@/shared/ui/Icons/Star'
-import { Colors } from '@/shared/styles'
+import { Colors, Fonts } from '@/shared/styles'
 import { router } from 'expo-router'
 
 const MOCK_REVIEWS = [
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     },
     headerTitle: {
         fontSize: 24,
-        fontWeight: '700',
+        fontFamily: Fonts.sansBold,
         color: Colors.textPrimary,
     },
     ratingBlock: {
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     },
     ratingValue: {
         fontSize: 24,
-        fontWeight: '700',
+        fontFamily: Fonts.sansBold,
         color: Colors.textPrimary,
     },
     headerStars: {
@@ -132,6 +132,7 @@ const styles = StyleSheet.create({
     },
     reviewsCount: {
         fontSize: 15,
+        fontFamily: Fonts.sans,
         color: Colors.placeholder,
     },
     scrollContent: {
@@ -160,7 +161,7 @@ const styles = StyleSheet.create({
     },
     userName: {
         fontSize: 18,
-        fontWeight: '700',
+        fontFamily: Fonts.sansBold,
         color: Colors.textPrimary,
         marginBottom: 5
     },
@@ -174,6 +175,7 @@ const styles = StyleSheet.create({
     },
     reviewText: {
         fontSize: 15,
+        fontFamily: Fonts.sans,
         color: Colors.textPrimary,
         lineHeight: 22,
     }

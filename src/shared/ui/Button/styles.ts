@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native'
 
-import { Colors } from '@/shared/styles'
+import { Colors, Fonts } from '@/shared/styles'
 
 export const styles = StyleSheet.create({
 	button: {
@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
 	},
 	text: {
 		color: Colors.textPrimary,
-		fontWeight: 700,
+		fontFamily: Fonts.sansBold,
 		fontSize: 20,
 		textAlign: 'center',
 	},

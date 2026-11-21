@@ -1,6 +1,6 @@
 import { View, Text, ScrollView, StyleSheet, Pressable } from 'react-native'
 import { useState } from 'react'
-import { Colors } from '@/shared/styles'
+import { Colors, Fonts } from '@/shared/styles'
 import { ProfileDescriptionCard } from '@/feature/profile/ui/profile-description-card'
 import { ProfileIdentity } from '@/feature/profile/ui/profile-identity'
 import { ProfileDetailsSheet } from '@/feature/profile/ui/profile-details-sheet'
@@ -113,16 +113,17 @@ const styles = StyleSheet.create({
     headerCard: { 
         paddingTop: 58,
         paddingBottom: 24,  
-        marginBottom: 0,
+        marginBottom: 10,
     },
     sectionTitle: { 
         fontSize: 20, 
-        fontWeight: '700', 
+        fontFamily: Fonts.sansBold,
         color: Colors.textPrimary, 
         marginBottom: 12 
     },
     month: { 
         fontSize: 20,
+        fontFamily: Fonts.sansBold,
         color: Colors.textPrimary
     },
     calendarCard: {

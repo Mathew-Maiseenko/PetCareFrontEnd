@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native'
-import { Colors } from '@/shared/styles'
+import { Colors, Fonts } from '@/shared/styles'
 import SortIcon from '@/shared/ui/Icons/Sort'
 import FilterIcon from '@/shared/ui/Icons/Filter'
 import { router } from 'expo-router'
@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
     },
 	text: { 
         fontSize: 15, 
+        fontFamily: Fonts.sans,
         color: Colors.textPrimary 
     },
 	tag: {
@@ -76,6 +77,7 @@ const styles = StyleSheet.create({
     },
 	tagText: { 
         fontSize: 14, 
+        fontFamily: Fonts.sans,
         color: Colors.textPrimary
     },
 })

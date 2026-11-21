@@ -1,5 +1,5 @@
 import { View, Text, Image, StyleSheet, ScrollView } from 'react-native'
-import { Colors } from '@/shared/styles'
+import { Colors, Fonts } from '@/shared/styles'
 
 const ORDERS = [
     { id: '1', name: 'Матвей', date: '24.12.2025', time: 'Целый день', status: 'Принято', avatar: 'https://i.pravatar.cc/150?img=12', upcoming: true },
@@ -57,15 +57,15 @@ const styles = StyleSheet.create({
     },
     title: { 
         fontSize: 24,
-        color: Colors.textPrimary, 
-        fontWeight: 700,
+        fontFamily: Fonts.sansBold,
+        color: Colors.textPrimary,
         paddingHorizontal: 24, 
         marginBottom: 40
     },
     subtitle: { 
         fontSize: 20,
         color: Colors.textPrimary, 
-        fontWeight: 700,
+        fontFamily: Fonts.sansBold,
         paddingHorizontal: 24, 
         marginBottom: 23 
     },
@@ -87,17 +87,19 @@ const styles = StyleSheet.create({
     },
     name: { 
         fontSize: 18,
-        fontWeight: 600,
+        fontFamily: Fonts.sansBold,
         color: Colors.textPrimary, 
         marginBottom: 2 
     },
     date: { 
         fontSize: 13,
+        fontFamily: Fonts.sans,
         color: Colors.placeholder,
         marginBottom: 2
     },
     time: {
         fontSize: 13, 
+        fontFamily: Fonts.sans,
         color: Colors.placeholder,
     },
     statusBadge: { 
@@ -105,12 +107,12 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
 		paddingHorizontal: 18,
 		borderRadius: 5,
-        width: 100,
+        width: 110,
         alignItems: 'center',
     },
     statusText: {
         fontSize: 14,
         color: Colors.textPrimary,
-        fontWeight: 700,
+        fontFamily: Fonts.sansBold,
     },
 })

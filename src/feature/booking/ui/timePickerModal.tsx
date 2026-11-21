@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Modal, Pressable, FlatList } from 'react-native'
-import { Colors } from '@/shared/styles'
+import { Colors, Fonts } from '@/shared/styles'
 import { StyledButton } from '@/shared/ui/Button'
 import CloseIcon from '@/shared/ui/Icons/Close'
 import { useState } from 'react'
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 24,
-        fontWeight: '700',
+        fontFamily: Fonts.sansBold,
         color: Colors.textPrimary,
     },
     wheelsWrapper: {
@@ -171,6 +171,7 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 24,
+        fontFamily: Fonts.sans,
         color: '#C4C4C4',
     },
     textActive: {
@@ -178,6 +179,7 @@ const styles = StyleSheet.create({
     },
     separator: {
         fontSize: 24,
+        fontFamily: Fonts.sans,
         color: Colors.textPrimary,
         width: 20,
         textAlign: 'center',

@@ -22,7 +22,7 @@ export function CalendarGrid({ currentMonth, eventsDates, onDayPress }: Props) {
         markedDates[dateStr] = {
             customStyles: {
                 container: { backgroundColor: 'transparent' },
-                text: { color: '#000000', fontFamily: 'Nunito-Regular' }
+                text: { color: '#000000', fontFamily: 'Nunito_500Medium' }
             }
         }
         if (dateStr < today) {

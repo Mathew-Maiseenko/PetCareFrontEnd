@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, Pressable } from 'react-native'
 import { router } from 'expo-router'
-import { Colors } from '@/shared/styles'
+import { Colors, Fonts } from '@/shared/styles'
 import BackArrowIcon from '@/shared/ui/Icons/BackButton'
 
 export function SearchHeader() {
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
 	},
 	title: {
 		fontSize: 24,
-        fontWeight: 700,
+        fontFamily: Fonts.sansBold,
 		color: Colors.textPrimary,
 	},
 })
