@@ -9,7 +9,6 @@ export default function PetOwnerAppLayout() {
 			<View style={styles.content}>
 				<Slot />
 			</View>
-			<RoleTabBar />
 		</View>
 	)
 }
