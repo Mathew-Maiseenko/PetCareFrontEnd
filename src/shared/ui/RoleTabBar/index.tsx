@@ -118,7 +118,7 @@ export function RoleTabBar() {
 const styles = StyleSheet.create({
 	bar: {
 		flexDirection: 'row',
-		alignItems: 'flex-start',
+		alignItems: 'flex-end',
 		justifyContent: 'space-around',
 		backgroundColor: Colors.backgroundPrimary,
 		borderTopWidth: StyleSheet.hairlineWidth,
