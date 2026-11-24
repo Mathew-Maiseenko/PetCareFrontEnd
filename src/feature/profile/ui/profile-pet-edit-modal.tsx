@@ -88,7 +88,7 @@ export function ProfilePetEditModal({
 	const router = useRouter()
 	const handleAddInfo = () => {
 		onClose()
-		router.push('/petowner/profile/petprofile/information')
+		router.push('/pet-owner/profile/petprofile/information')
 	}
 
 	return (

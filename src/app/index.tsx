@@ -5,7 +5,8 @@ import { Redirect } from 'expo-router'
 
 export default function HomeScreen() {
 	if (__DEV__) {
-		return <Redirect href='/sitter/profile' />
+		//return <Redirect href='/sitter/profile' />
+		return <Redirect href='/pet-owner/main' />
 	}
 
 	const user = getRegisteredUser()

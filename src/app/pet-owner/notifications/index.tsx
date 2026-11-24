@@ -1,5 +1,5 @@
-import { RoleSectionScreen } from '@/feature/home/ui/role-section'
+import { NotificationsScreen } from '@/feature/notifications/notifications-screen'
 
 export default function PetOwnerNotificationsRoute() {
-	return <RoleSectionScreen title='Владелец питомца' section='Уведомления' />
+	return <NotificationsScreen />
 }
