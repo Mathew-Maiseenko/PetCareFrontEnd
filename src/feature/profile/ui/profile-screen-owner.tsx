@@ -9,7 +9,7 @@ import { ProfileHeader } from './profile-header'
 import { ProfileIdentity } from './profile-identity'
 import { ProfilePhone } from './profile-phone'
 import { ProfileSwitch } from './profile-switch'
-import { ProfileEditModal } from './profile-edit-modal'
+import { ProfilePetownerEditModal } from './profile-petowner-edit-modal'
 import { styles } from './styles'
 import { StyledButton } from '@/shared/ui/Button'
 import { RoleTabBar } from '@/shared/ui/RoleTabBar'
@@ -29,12 +29,12 @@ export function ProfileOwnerScreen({ role, onLogout }: ProfileScreenProps) {
 
 	const router = useRouter()
 	const handleNavigate = () => {
-		router.push('/petowner/profile/petprofile')
+		router.push('/pet-owner/profile/petprofile')
 	}
 
 	return (
 		<SafeAreaView style={styles.screen} edges={['top']}>
-			<ScrollView contentContainerStyle={{ gap: 10 }}>
+			<ScrollView style={styles.scrollView} contentContainerStyle={{ gap: 10 }}>
 				<View style={styles.topBlock}>
 					<ProfileHeader
 						onLogout={onLogout}
@@ -47,19 +47,20 @@ export function ProfileOwnerScreen({ role, onLogout }: ProfileScreenProps) {
 					/>
 					<ProfilePhone phone={typedProfile.phone} />
 				</View>
-				<ProfileSwitch
-					caption='Получать уведомления'
-					text='Получайте уведомления о своем питомце и интересные советы'
-				/>
-				<StyledButton
-					style={{ width: '90%', marginLeft: '5%' }}
-					onPress={handleNavigate}
-				>
-					Личный кабинет питомца
-				</StyledButton>
+				<View style={styles.cardsSection}>
+					<ProfileSwitch
+						caption='Получать уведомления'
+						text='Получайте уведомления о своем питомце и интересные советы'
+					/>
+					<StyledButton
+						style={{ width: '90%', marginLeft: '5%' }}
+						onPress={handleNavigate}
+					>
+						Личный кабинет питомца
+					</StyledButton>
+				</View>
 			</ScrollView>
-			<RoleTabBar />
-			<ProfileEditModal
+			<ProfilePetownerEditModal
 				visible={isEditOpen}
 				role={role}
 				profile={typedProfile}

@@ -16,7 +16,7 @@ export function NotificationAction() {
 			</TouchableOpacity>
 			<TouchableOpacity>
 				<StyledButton onPress={handleNavigate} style={styles.acceptButton}>
-					Принять
+					<Text style={styles.acceptButtonText}>Принять</Text>
 				</StyledButton>
 			</TouchableOpacity>
 		</View>
@@ -34,6 +34,14 @@ const styles = StyleSheet.create({
 		height: 30,
 	},
 	acceptButton: {
-		width: 120,
+		width: 100,
+		height: 37,
+		paddingHorizontal: 20,
+		paddingVertical: 8,
+	},
+	acceptButtonText: {
+		fontSize: 14,
+		fontWeight: '600',
+		color: '#000',
 	},
 })

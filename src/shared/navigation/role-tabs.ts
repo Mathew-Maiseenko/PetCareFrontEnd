@@ -78,12 +78,12 @@ export const ROLE_TABS_PETOWNER: RoleTabItemPetOwner[] = [
 		name: 'notifications',
 		label: 'Уведомления',
 		Icon: NotificationIcon,
-		href: '/petowner/notifications',
+		href: '/pet-owner/notifications',
 	},
 	{
 		name: 'profile',
 		label: 'Профиль',
 		Icon: ProfileIcon,
-		href: '/petowner/profile',
+		href: '/pet-owner/profile',
 	},
 ]

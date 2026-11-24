@@ -60,7 +60,7 @@ export function RoleTabBar() {
 	const hideTabBar = (segments as string[]).includes('setup')
 
 	const isProvider = roleRoot === 'sitter' || roleRoot === 'hotel'
-	const isOwner = roleRoot === 'petowner' || roleRoot === 'pet-owner'
+	const isOwner = roleRoot === 'pet-owner'
 
 	if (!isProvider && !isOwner) {
 		return null

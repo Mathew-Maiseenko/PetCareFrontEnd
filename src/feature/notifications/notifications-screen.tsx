@@ -17,7 +17,6 @@ export function NotificationsScreen() {
 					<NotificationGroup key={index} group={group} />
 				))}
 			</ScrollView>
-			<RoleTabBar />
 		</SafeAreaView>
 	)
 }

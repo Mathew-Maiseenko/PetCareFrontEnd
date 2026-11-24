@@ -42,12 +42,12 @@ export function ProfilePetScreen({
 	}
 	const router = useRouter()
 	const handleNavigate = () => {
-		router.push('/petowner/profile')
+		router.push('/pet-owner/profile')
 	}
 
 	return (
 		<SafeAreaView style={styles.screen} edges={['top']}>
-			<ScrollView contentContainerStyle={{ gap: 10 }}>
+			<ScrollView style={styles.scrollView} contentContainerStyle={{ gap: 10 }}>
 				<View style={styles.topBlock}>
 					<ProfileHeader
 						onLogout={onLogout}
@@ -61,28 +61,30 @@ export function ProfilePetScreen({
 					<ProfileTypePet type={typedProfile.type} />
 					<ProfileBreedPet breed={typedProfile.breed} />
 				</View>
-				<ProfileDescriptionCard
-					description={typedProfile.description}
-					onPressDetails={handlePressDetails}
-				/>
-				<ProfileSwitch
-					caption='Есть ли прививка'
-					text='Для большинства исполнителей прививка у питомца обязательна!'
-				/>
-				<View
-					style={{
-						flexDirection: 'row',
-						justifyContent: 'space-between',
-						width: '90%',
-						marginLeft: '5%',
-					}}
-				>
-					<StyledButton style={{ width: '17%' }}>
-						<AddPet color='#000000' />
-					</StyledButton>
-					<StyledButton style={{ width: '80%' }} onPress={handleNavigate}>
-						Личный кабинет хозяина
-					</StyledButton>
+				<View style={styles.cardsSection}>
+					<ProfileDescriptionCard
+						description={typedProfile.description}
+						onPressDetails={handlePressDetails}
+					/>
+					<ProfileSwitch
+						caption='Есть ли прививка'
+						text='Для большинства исполнителей прививка у питомца обязательна!'
+					/>
+					<View
+						style={{
+							flexDirection: 'row',
+							justifyContent: 'space-between',
+							width: '90%',
+							marginLeft: '5%',
+						}}
+					>
+						<StyledButton style={{ width: '17%' }}>
+							<AddPet color='#000000' />
+						</StyledButton>
+						<StyledButton style={{ width: '80%' }} onPress={handleNavigate}>
+							Личный кабинет хозяина
+						</StyledButton>
+					</View>
 				</View>
 			</ScrollView>
 			<ProfilePetDetailsSheet
@@ -90,7 +92,6 @@ export function ProfilePetScreen({
 				onClose={() => setIsDetailsOpen(false)}
 				profile={typedProfile}
 			/>
-			<RoleTabBar />
 			<ProfilePetEditModal
 				visible={isEditOpen}
 				role={UserRole.PET}
